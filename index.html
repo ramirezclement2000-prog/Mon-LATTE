@@ -8,1674 +8,195 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+  /* --- TES VARIABLES DE COULEURS (DA Business Plan) --- */
   :root {
     --green: #496d45;
     --green-light: #6a9865;
-    --green-pale: #e8f0e7;
     --gold: #bf9665;
-    --gold-light: #d4b48a;
-    --blush: #fff0f0;
     --cream: #faf7f2;
     --cream-dark: #f2ede4;
+    --blush: #fff0f0;
     --text: #1a1a18;
     --text-mid: #4a4a45;
-    --text-muted: #888880;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* GRAIN OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* NAV */
+  /* NAVIGATION */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 3rem;
-    background: rgba(250, 247, 242, 0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(191,150,101,0.15);
-    transition: all 0.3s ease;
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--green);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-  }
-
-  .nav-logo span {
-    color: var(--gold);
-    font-style: italic;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: var(--text-mid);
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--green); }
-
-  .nav-cta {
-    background: var(--green);
-    color: white !important;
-    padding: 0.55rem 1.4rem;
-    border-radius: 100px;
-    font-size: 0.78rem !important;
-    letter-spacing: 0.1em;
-    transition: background 0.2s !important;
-  }
-
-  .nav-cta:hover { background: var(--green-light) !important; color: white !important; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .hero-left {
-    padding: 8rem 4rem 5rem 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--green-pale);
-    color: var(--green);
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    margin-bottom: 2.5rem;
-    width: fit-content;
-    font-weight: 500;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 7vw, 6rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-  }
-
-  .hero h1 .script {
-    font-style: italic;
-    color: var(--green);
-    font-weight: 400;
-  }
-
-  .hero h1 .gold { color: var(--gold); }
-
-  .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-bottom: 2.5rem;
-    line-height: 1.5;
-    max-width: 380px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: var(--green);
-    color: white;
-    border: none;
-    padding: 0.85rem 2.2rem;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    transition: all 0.25s ease;
-    display: inline-block;
-  }
-
-  .btn-primary:hover {
-    background: var(--green-light);
-    transform: translateY(-1px);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--text-mid);
-    border: 1px solid rgba(74,74,69,0.3);
-    padding: 0.85rem 2.2rem;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    transition: all 0.25s ease;
-    display: inline-block;
-  }
-
-  .btn-outline:hover {
-    border-color: var(--green);
-    color: var(--green);
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 2.5rem;
-    margin-top: 3.5rem;
-    padding-top: 2.5rem;
-    border-top: 1px solid rgba(191,150,101,0.2);
-  }
-
-  .hero-stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 500;
-    color: var(--green);
-    display: block;
-  }
-
-  .hero-stat-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .hero-right {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .hero-img-main {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .hero-img-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, var(--cream) 0%, transparent 25%);
-  }
-
-  .hero-floating-card {
-    position: absolute;
-    bottom: 4rem;
-    left: -3rem;
-    background: white;
-    border-radius: 16px;
-    padding: 1.2rem 1.5rem;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    width: 200px;
-    z-index: 3;
-  }
-
-  .hero-floating-card .label {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.4rem;
-  }
-
-  .hero-floating-card .value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 0.2rem;
-  }
-
-  .hero-floating-card .sub {
-    font-size: 0.72rem;
-    color: var(--gold);
-  }
-
-  .dot-grid {
-    position: absolute;
-    top: 10rem;
-    right: 2rem;
-    opacity: 0.15;
-  }
-
-  /* DECORATIVE SVG LEAF */
-  .leaf-deco {
-    position: absolute;
-    opacity: 0.12;
-    pointer-events: none;
-  }
-
-  /* MARQUEE BAND */
-  .marquee-band {
-    background: var(--green);
-    color: white;
-    overflow: hidden;
-    padding: 0.9rem 0;
-    white-space: nowrap;
-  }
-
-  .marquee-inner {
-    display: inline-flex;
-    animation: marquee 28s linear infinite;
-    gap: 0;
-  }
-
-  .marquee-inner span {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0 2.5rem;
-    opacity: 0.85;
-    font-weight: 400;
-  }
-
-  .marquee-inner .dot {
-    color: var(--gold-light);
-    opacity: 1;
-    padding: 0;
-  }
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SECTIONS COMMON */
-  section { padding: 6rem 5rem; }
-
-  .section-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .section-label::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-    display: block;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--text);
-    margin-bottom: 1.5rem;
-  }
-
-  .section-title em {
-    font-style: italic;
-    color: var(--green);
-  }
-
-  /* ABOUT */
-  .about {
-    background: var(--cream-dark);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-
-  .about-text p {
-    color: var(--text-mid);
-    line-height: 1.8;
-    font-size: 0.95rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .about-highlight {
-    background: white;
-    border-left: 3px solid var(--green);
-    padding: 1.2rem 1.5rem;
-    border-radius: 0 12px 12px 0;
-    margin: 2rem 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.6;
-  }
-
-  .about-visual {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1rem;
-  }
-
-  .about-img-big {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    background: var(--green-pale);
-    border-radius: 16px;
-    height: 420px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .about-img-sm {
-    background: var(--cream);
-    border-radius: 12px;
-    height: 196px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .img-placeholder .icon {
-    font-size: 2.5rem;
-    opacity: 0.5;
-  }
-
-  .img-placeholder .lbl {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .about-pill {
-    position: absolute;
-    bottom: -1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--green);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 100px;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-
-  /* USPs row */
-  .usps {
-    background: white;
-    padding: 3.5rem 5rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-
-  .usp-item {
-    text-align: center;
-    padding: 2rem 1rem;
-    border-radius: 16px;
-    border: 1px solid rgba(191,150,101,0.15);
-    background: var(--cream);
-    transition: all 0.25s ease;
-  }
-
-  .usp-item:hover {
-    border-color: var(--green);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(73,109,69,0.1);
-  }
-
-  .usp-icon {
-    width: 52px;
-    height: 52px;
-    background: var(--green-pale);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.2rem;
-    font-size: 1.4rem;
-  }
-
-  .usp-item h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-  }
-
-  .usp-item p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-
-  /* MENU */
-  .menu-section {
-    background: var(--cream);
-    padding: 6rem 5rem;
-  }
-
-  .menu-header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-  }
-
-  .menu-tabs {
-    display: flex;
-    gap: 0.5rem;
-    background: var(--cream-dark);
-    padding: 0.35rem;
-    border-radius: 100px;
-    margin-bottom: 3rem;
-  }
-
-  .tab-btn {
-    border: none;
-    background: transparent;
-    padding: 0.6rem 1.4rem;
-    border-radius: 100px;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    color: var(--text-muted);
-    font-weight: 500;
-    transition: all 0.25s ease;
-  }
-
-  .tab-btn.active {
-    background: var(--green);
-    color: white;
-  }
-
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-
-  .menu-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem 1.75rem;
-    border: 1px solid rgba(191,150,101,0.12);
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .menu-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 0;
-    background: var(--green);
-    border-radius: 0 0 3px 3px;
-    transition: height 0.3s ease;
-  }
-
-  .menu-card:hover::before { height: 100%; }
-
-  .menu-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 50px rgba(73,109,69,0.1);
-    border-color: rgba(73,109,69,0.2);
-  }
-
-  .menu-card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 0.6rem;
-  }
-
-  .menu-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.2;
-    max-width: 75%;
-  }
-
-  .menu-price {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--gold);
-    white-space: nowrap;
-  }
-
-  .menu-desc {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-    font-style: italic;
-  }
-
-  .menu-tags {
-    display: flex;
-    gap: 0.4rem;
-    margin-top: 0.8rem;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.65rem;
-    border-radius: 100px;
-    font-weight: 500;
-  }
-
-  .tag-green { background: var(--green-pale); color: var(--green); }
-  .tag-gold { background: #f5ede0; color: #8a6035; }
-  .tag-pink { background: #fce8e8; color: #a04545; }
-  .tag-star { background: #f0edf5; color: #6a4e8a; }
-
-  .menu-note {
-    text-align: center;
-    margin-top: 2.5rem;
-    padding: 1.2rem;
-    background: var(--green-pale);
-    border-radius: 12px;
-    font-size: 0.78rem;
-    color: var(--green);
-    letter-spacing: 0.05em;
-    font-weight: 500;
-  }
-
-  /* AMBIANCE */
-  .ambiance {
-    background: var(--text);
-    color: white;
-    padding: 6rem 5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ambiance .section-label { color: var(--gold-light); }
-  .ambiance .section-label::before { background: var(--gold-light); }
-
-  .ambiance .section-title { color: white; }
-  .ambiance .section-title em { color: var(--gold-light); }
-
-  .ambiance-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-    align-items: center;
-    margin-top: 3rem;
-  }
-
-  .ambiance-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .ambiance-feature {
-    display: flex;
-    gap: 1.2rem;
-    align-items: flex-start;
-  }
-
-  .ambiance-feat-icon {
-    width: 42px;
-    height: 42px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .ambiance-feat-text h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: white;
-    margin-bottom: 0.25rem;
-  }
-
-  .ambiance-feat-text p {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.5;
-  }
-
-  .ambiance-photos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.75rem;
-    height: 460px;
-  }
-
-  .ambiance-photo {
-    background: rgba(255,255,255,0.06);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .ambiance-photo:first-child {
-    grid-row: 1 / 3;
-    border-radius: 16px;
-  }
-
-  .photo-label {
-    position: absolute;
-    bottom: 0.8rem;
-    left: 0.8rem;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
-    color: white;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-  }
-
-  .photo-placeholder {
-    text-align: center;
-    opacity: 0.3;
-  }
-
-  .photo-placeholder p {
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-    color: white;
-  }
-
-  /* LOCATION */
-  .location {
-    background: var(--cream-dark);
-    padding: 6rem 5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .location-info p {
-    color: var(--text-mid);
-    font-size: 0.9rem;
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-
-  .location-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .location-detail-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.2rem;
-    border: 1px solid rgba(191,150,101,0.12);
-  }
-
-  .location-detail-card .ldc-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.4rem;
-  }
-
-  .location-detail-card .ldc-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.3;
-  }
-
-  .<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.4403969605064!2d3.036815376634464!3d42.863547971150524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b05ef5714c480b%3A0x78f0b7e36f726026!2sQuai%20de%20l&#39;Angle%2C%2011370%20Leucate!5e0!3m2!1sfr!2sfr!4v1776950392826!5m2!1sfr!2sfr" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    background: white;
-    border-radius: 20px;
-    height: 380px;
-    border: 1px solid rgba(191,150,101,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .map-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(rgba(232,240,231,0.3) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232,240,231,0.3) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
-
-  .map-pin {
-    position: relative;
-    z-index: 2;
-    width: 52px;
-    height: 52px;
-    background: var(--green);
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 30px rgba(73,109,69,0.4);
-  }
-
-  .map-pin-inner {
-    width: 18px;
-    height: 18px;
-    background: white;
-    border-radius: 50%;
-    transform: rotate(45deg);
-  }
-
-  .map-label {
-    position: relative;
-    z-index: 2;
-    background: var(--green);
-    color: white;
-    padding: 0.5rem 1.2rem;
-    border-radius: 100px;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-  }
-
-  /* SEASONAL */
-  .seasonal {
-    background: var(--green);
-    color: white;
-    padding: 4rem 5rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .seasonal h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 400;
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-
-  .seasonal h2 em { font-style: italic; color: var(--gold-light); }
-
-  .seasonal p {
-    color: rgba(255,255,255,0.75);
-    font-size: 0.9rem;
-    line-height: 1.7;
-    max-width: 500px;
-  }
-
-  .seasonal-cta {
-    flex-shrink: 0;
-    text-align: center;
-  }
-
-  .seasonal-cta .big-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 5rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.15);
-    line-height: 1;
-    display: block;
-  }
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem; background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(10px); border-bottom: 1px solid rgba(191,150,101,0.15);
+  }
+  .nav-logo img { height: 60px; object-fit: contain; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center;}
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .nav-cta { background: var(--green); color: white !important; padding: 0.6rem 1.2rem; border-radius: 50px; }
+
+  /* HERO SECTION (ACCUEIL) */
+  .hero { min-height: 100vh; display: flex; flex-wrap: wrap; padding-top: 80px; }
+  .hero-left { flex: 1; min-width: 350px; padding: 4rem 5rem; display: flex; flex-direction: column; justify-content: center; }
+  .hero-right { flex: 1.2; min-width: 350px; position: relative; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; border-bottom-left-radius: 40px; }
+
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
+  .hero h1 span.script { font-style: italic; color: var(--green); }
+  .hero h1 span.gold { color: var(--gold); }
+  
+  .btn-primary { background: var(--green); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; display: inline-block; margin-right: 1rem; transition: 0.3s; }
+  .btn-primary:hover { background: var(--green-light); transform: translateY(-3px); }
+
+  /* SECTIONS */
+  section { padding: 5rem 10%; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 2rem; }
+  .section-title em { font-style: italic; color: var(--green); }
+
+  /* GRID CARDS (MENU) */
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+  .menu-card { background: white; padding: 1.5rem; border-radius: 20px; border: 1px solid var(--cream-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.03); display: flex; flex-direction: column; transition: transform 0.3s;}
+  .menu-card:hover { transform: translateY(-5px); }
+  .menu-price { color: var(--gold); font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem; text-align: right;}
+  .menu-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 0.5rem;}
+  .menu-card p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.5; flex-grow: 1;}
+  
+  /* IMAGES */
+  .grid-image { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
+  .ambiance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
 
   /* FOOTER */
-  footer {
-    background: var(--text);
-    color: white;
-    padding: 3.5rem 5rem 2rem;
-  }
+  footer { background: var(--text); color: white; padding: 4rem 10% 2rem; }
+  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; border-bottom: 1px solid #333; padding-bottom: 3rem; }
 
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 4rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 2rem;
-  }
-
-  .footer-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    color: white;
-    margin-bottom: 0.75rem;
-  }
-
-  .footer-brand span { color: var(--gold-light); font-style: italic; }
-
-  .footer-tagline {
-    color: rgba(255,255,255,0.45);
-    font-size: 0.82rem;
-    line-height: 1.6;
-    max-width: 300px;
-  }
-
-  footer h4 {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 1.2rem;
-    font-weight: 500;
-  }
-
-  footer ul { list-style: none; }
-
-  footer ul li {
-    margin-bottom: 0.6rem;
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.4;
-  }
-
-  footer ul li a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  footer ul li a:hover { color: var(--gold-light); }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.3);
-  }
-
-  .footer-bottom .socials {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .social-pill {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.6);
-    padding: 0.4rem 0.9rem;
-    border-radius: 100px;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .social-pill:hover {
-    background: rgba(255,255,255,0.15);
-    color: white;
-  }
-
-  /* ANIMATIONS */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .fade-up:nth-child(2) { transition-delay: 0.1s; }
-  .fade-up:nth-child(3) { transition-delay: 0.2s; }
-  .fade-up:nth-child(4) { transition-delay: 0.3s; }
-
-  /* INTOLERANCES LEGEND */
-  .intol-legend {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .intol-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-  }
-
-  .intol-badge {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.55rem;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .badge-sg { background: var(--green-pale); color: var(--green); }
-  .badge-sl { background: #f0edf5; color: #6a4e8a; }
-  .badge-hot { background: #fce8e8; color: #a04545; }
-
-  /* SCROLL INDICATOR */
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 3;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(to bottom, var(--green), transparent);
-    animation: scrollLine 1.8s ease-in-out infinite;
-  }
-
-  .scroll-text {
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-  }
-
-  @keyframes scrollLine {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    51% { transform: scaleY(1); transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
-  }
-
-  /* COFFEE ILLUSTRATION (SVG inline) */
-  .coffee-svg-deco {
-    position: absolute;
-    right: -3rem;
-    bottom: -2rem;
-    opacity: 0.04;
-    pointer-events: none;
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem; }
+    .nav-links { display: none; }
+    .hero-left { padding: 2rem; }
+    section { padding: 3rem 5%; }
+    .hero-right { min-height: 50vh; }
+    .hero-img { border-bottom-left-radius: 0px; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">MON <span>latte</span></a>
+  <a href="#" class="nav-logo">
+    <img src="1.png" alt="Logo MON latte">
+  </a>
   <ul class="nav-links">
-    <li><a href="#about">Notre histoire</a></li>
-    <li><a href="#menu">La carte</a></li>
-    <li><a href="#ambiance">L'ambiance</a></li>
-    <li><a href="#location">Localisation</a></li>
-    <li><a href="#menu" class="nav-cta">Voir la carte</a></li>
+    <li><a href="#about">Histoire</a></li>
+    <li><a href="#menu">La Carte</a></li>
+    <li><a href="#ambiance">Ambiance</a></li>
+    <li><a href="#location">Nous Trouver</a></li>
+    <li><a href="#menu" class="nav-cta">Découvrir</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero" style="padding:0;">
+<section class="hero" style="padding-right: 0;">
   <div class="hero-left">
-    <div class="hero-badge">Coffee Shop · Leucate</div>
-
-    <h1>
-      L'art du<br>
-      <span class="script">café</span> à la<br>
-      <span class="gold">française</span>
-    </h1>
-
-    <p class="hero-sub">
-      Un univers gourmand et immersif, inspiré des coffee shops australiens,<br>au cœur des Pyrénées-Orientales.
-    </p>
-
-    <div class="hero-actions">
+    <div style="color:var(--green); font-weight: bold; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase;">Coffee Shop · Leucate</div>
+    <h1>L'art du <span class="script">café</span><br> à la <span class="gold">française</span></h1>
+    <p style="font-size: 1.2rem; color: var(--text-mid); margin-bottom: 2rem;">Un univers gourmand inspiré des coffee shops australiens, au cœur de Leucate village.</p>
+    <div>
       <a href="#menu" class="btn-primary">Découvrir la carte</a>
-      <a href="#about" class="btn-outline">Notre histoire</a>
-    </div>
-
-    <div class="hero-stats">
-      <div>
-        <span class="hero-stat-num">100%</span>
-        <span class="hero-stat-label">Fait maison</span>
-      </div>
-      <div>
-        <span class="hero-stat-num">Sans G&L</span>
-        <span class="hero-stat-label">Options disponibles</span>
-      </div>
-      <div>
-        <span class="hero-stat-num">Spécialité</span>
-        <span class="hero-stat-label">Café de terroir</span>
-      </div>
     </div>
   </div>
-
   <div class="hero-right">
-    <!-- Hero image placeholder - replace src with your photo -->
-    <div style="width:100%;height:100%;background:linear-gradient(135deg,#e8f0e7 0%,#d4c4a8 40%,#bf9665 100%);display:flex;align-items:center;justify-content:center;">
-      <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.25;">
-        <circle cx="100" cy="85" r="55" stroke="#496d45" stroke-width="2"/>
-        <ellipse cx="100" cy="145" rx="45" ry="12" stroke="#496d45" stroke-width="2"/>
-        <path d="M145 85 C155 85 165 75 165 65 C165 55 155 50 150 55" stroke="#496d45" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="100" cy="85" r="35" fill="#496d45" fill-opacity="0.1"/>
-        <path d="M80 85 Q100 70 120 85" stroke="#496d45" stroke-width="1.5" fill="none"/>
-      </svg>
-    </div>
-    <div class="hero-img-overlay"></div>
-
-    <div class="hero-floating-card">
-      <div class="label">Boisson signature</div>
-      <div class="value">Ube Latte</div>
-      <div class="sub">À partir de 5,00 €</div>
-    </div>
-  </div>
-
-  <div class="scroll-indicator">
-    <div class="scroll-text">Scroll</div>
-    <div class="scroll-line"></div>
+    <img src="F476DB8E-03F7-45B4-91B1-C2C987DA9DC6.jpg" alt="Intérieur MON latte Leucate" class="hero-img">
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-band">
-  <div class="marquee-inner">
-    <span>Matcha Latte</span><span class="dot">✦</span>
-    <span>Ube Signature</span><span class="dot">✦</span>
-    <span>Chai Latte</span><span class="dot">✦</span>
-    <span>Cold Brew</span><span class="dot">✦</span>
-    <span>Pistachio Latte</span><span class="dot">✦</span>
-    <span>Specialty Coffee</span><span class="dot">✦</span>
-    <span>Cinnamon Roll Latte</span><span class="dot">✦</span>
-    <span>Sans Lactose</span><span class="dot">✦</span>
-    <span>Sans Gluten</span><span class="dot">✦</span>
-    <span>Pâtisseries Maison</span><span class="dot">✦</span>
-    <!-- Duplicate for seamless loop -->
-    <span>Matcha Latte</span><span class="dot">✦</span>
-    <span>Ube Signature</span><span class="dot">✦</span>
-    <span>Chai Latte</span><span class="dot">✦</span>
-    <span>Cold Brew</span><span class="dot">✦</span>
-    <span>Pistachio Latte</span><span class="dot">✦</span>
-    <span>Specialty Coffee</span><span class="dot">✦</span>
-    <span>Cinnamon Roll Latte</span><span class="dot">✦</span>
-    <span>Sans Lactose</span><span class="dot">✦</span>
-    <span>Sans Gluten</span><span class="dot">✦</span>
-    <span>Pâtisseries Maison</span><span class="dot">✦</span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-text fade-up">
-    <div class="section-label">Notre histoire</div>
-    <h2 class="section-title">Deux passionnés,<br>une <em>vision</em></h2>
-
-    <div class="about-highlight">
-      « Notre coffee shop ne sera pas "un de plus" — MON latte sera LA nouveauté de Leucate. »
-    </div>
-
-    <p>Nous sommes Marjorie et Clément, deux amoureux du café et de la gastronomie. Attirés par l'univers des baristas et du Latté Art, nous avons décidé de créer l'endroit dont nous rêvions.</p>
-
-    <p>Clément, passionné de torréfaction, explore les terroirs et les arômes. Marjorie, véritable artiste du latte, crée les recettes les plus gourmandes et inclusives — intolérante au lactose et au gluten, elle garantit une offre accessible à tous.</p>
-
-    <p>Ensemble, nous importons la culture des coffee shops australiens, reconnus pour leur excellence et leur sens de l'expérience client, en l'adaptant au charme méditerranéen de Leucate.</p>
-  </div>
-
-  <div class="about-visual fade-up">
-    <div class="about-img-big">
-      <div class="img-placeholder" style="background:var(--green-pale);">
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="25" r="18" stroke="#496d45" stroke-width="1.5"/><ellipse cx="30" cy="47" rx="15" ry="4" stroke="#496d45" stroke-width="1.5"/><path d="M48 25 C53 25 58 20 58 15" stroke="#496d45" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
-        <span class="lbl">Photo du café</span>
-      </div>
-    </div>
-    <div class="about-img-sm">
-      <div class="img-placeholder" style="background:var(--cream-dark);">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 28 L8 12 L28 12 L28 28 Z" stroke="#bf9665" stroke-width="1.5" fill="none"/><path d="M14 12 L14 8 L22 8 L22 12" stroke="#bf9665" stroke-width="1.5" fill="none"/></svg>
-        <span class="lbl">Intérieur</span>
-      </div>
-    </div>
-    <div class="about-img-sm">
-      <div class="img-placeholder" style="background:#f5ede0;">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="14" r="8" stroke="#bf9665" stroke-width="1.5"/><path d="M10 28 Q18 22 26 28" stroke="#bf9665" stroke-width="1.5" fill="none"/></svg>
-        <span class="lbl">Marjorie & Clément</span>
-      </div>
-    </div>
-    <div class="about-pill">☕ Ouverture 2025</div>
-  </div>
-</section>
-
-<!-- USPs -->
-<div class="usps">
-  <div class="usp-item fade-up">
-    <div class="usp-icon">🌿</div>
-    <h3>Café de Spécialité</h3>
-    <p>Grains sélectionnés selon leur terroir, torréfiés avec soin pour révéler leurs arômes.</p>
-  </div>
-  <div class="usp-item fade-up">
-    <div class="usp-icon">🥛</div>
-    <h3>Sans Lactose & Gluten</h3>
-    <p>Laits végétaux disponibles (avoine, soja, amande) pour tous les profils alimentaires.</p>
-  </div>
-  <div class="usp-item fade-up">
-    <div class="usp-icon">✨</div>
-    <h3>Instagrammable</h3>
-    <p>Un lieu pensé pour l'expérience visuelle et sensorielle, idéal pour vos réseaux sociaux.</p>
-  </div>
-  <div class="usp-item fade-up">
-    <div class="usp-icon">🏡</div>
-    <h3>Fait Maison</h3>
-    <p>Pâtisseries artisanales et boissons préparées sur place, chaque jour avec passion.</p>
-  </div>
-</div>
-
-<!-- MENU -->
-<section class="menu-section" id="menu">
-  <div class="menu-header">
-    <div>
-      <div class="section-label">La carte</div>
-      <h2 class="section-title">Nos <em>créations</em></h2>
-    </div>
-  </div>
-
-  <div class="intol-legend">
-    <div class="intol-item"><span class="intol-badge badge-sg">SG</span> Sans Gluten disponible</div>
-    <div class="intol-item"><span class="intol-badge badge-sl">SL</span> Sans Lactose disponible</div>
-    <div class="intol-item"><span class="intol-badge badge-hot">☕</span> Chaud &amp; Froid</div>
-  </div>
-
-  <div class="menu-tabs">
-    <button class="tab-btn active" onclick="switchTab('classique')">Classique</button>
-    <button class="tab-btn" onclick="switchTab('latte')">Lattés</button>
-    <button class="tab-btn" onclick="switchTab('matcha')">Matcha & Ube</button>
-    <button class="tab-btn" onclick="switchTab('signature')">Signatures</button>
-    <button class="tab-btn" onclick="switchTab('patisserie')">Pâtisseries</button>
-  </div>
-
-  <!-- CLASSIQUE -->
-  <div class="tab-content active" id="tab-classique">
-    <div class="menu-grid">
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Espresso</h3>
-          <span class="menu-price">2,50 € / 3,50 €</span>
-        </div>
-        <p class="menu-desc">Simple ou double, avec nos cafés de spécialité sélectionnés.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Americano</h3>
-          <span class="menu-price">3,50 €</span>
-        </div>
-        <p class="menu-desc">Espresso allongé à l'eau chaude, doux et équilibré.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud</span><span class="tag tag-green">SL</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Cappuccino</h3>
-          <span class="menu-price">4,00 €</span>
-        </div>
-        <p class="menu-desc">Espresso, lait chaud et mousse onctueuse pour un moment de douceur.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud</span><span class="tag tag-green">SL dispo</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Cold Brew</h3>
-          <span class="menu-price">4,00 €</span>
-        </div>
-        <p class="menu-desc">Infusé à froid pendant 12h minimum, méthode douce et arômes intenses.</p>
-        <div class="menu-tags"><span class="tag tag-green">SL</span><span class="tag tag-green">SG</span></div>
-      </div>
-    </div>
-    <p class="menu-note">☘ Lait végétal d'avoine disponible sans supplément sur tous nos classiques</p>
-  </div>
-
-  <!-- LATTES -->
-  <div class="tab-content" id="tab-latte">
-    <div class="menu-grid">
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Latte</h3>
-          <span class="menu-price">4,50 €</span>
-        </div>
-        <p class="menu-desc">Espresso, lait texturé, latte art selon l'inspiration du barista.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud & Froid</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Vanillatte</h3>
-          <span class="menu-price">4,50 €</span>
-        </div>
-        <p class="menu-desc">Latte doux à la vanille, une alliance gourmande et réconfortante.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud & Froid</span><span class="tag tag-green">SL dispo</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Latte Macchiato</h3>
-          <span class="menu-price">4,50 €</span>
-        </div>
-        <p class="menu-desc">Lait mousse, espresso versé délicatement pour une belle stratification.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Moccaccino</h3>
-          <span class="menu-price">5,00 €</span>
-        </div>
-        <p class="menu-desc">Café, chocolat et lait onctueux pour les amateurs de douceur intense.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud & Froid</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Mocca Blanc</h3>
-          <span class="menu-price">5,00 €</span>
-        </div>
-        <p class="menu-desc">Espresso avec chocolat blanc et lait crémeux, une douceur enveloppante.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud & Froid</span></div>
-      </div>
-    </div>
-    <p class="menu-note">🌿 Tous nos lattés sont préparés avec du café de spécialité choisi par nos soins</p>
-  </div>
-
-  <!-- MATCHA & UBE -->
-  <div class="tab-content" id="tab-matcha">
-    <div class="menu-grid">
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Matcha Latte</h3>
-          <span class="menu-price">5,00 €</span>
-        </div>
-        <p class="menu-desc">Matcha cérémonie, lait — la base incontournable, douce et végétale.</p>
-        <div class="menu-tags"><span class="tag tag-hot">☕ Chaud & Froid</span><span class="tag tag-green">SL dispo</span><span class="tag tag-green">SG</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Matcha Vanilla</h3>
-          <span class="menu-price">5,90 €</span>
-        </div>
-        <p class="menu-desc">Matcha, crème anglaise, lait et crème fouettée à la vanille.</p>
-        <div class="menu-tags"><span class="tag tag-green">SG</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Matcha Fraise</h3>
-          <span class="menu-price">5,90 €</span>
-        </div>
-        <p class="menu-desc">Matcha cérémonie, lait et purée de fraise fraîche. Un équilibre parfait.</p>
-        <div class="menu-tags"><span class="tag tag-green">SG</span><span class="tag tag-green">SL dispo</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Matcha Coco</h3>
-          <span class="menu-price">5,90 €</span>
-        </div>
-        <p class="menu-desc">Eau de coco et crème de matcha coco — tropical et rafraîchissant.</p>
-        <div class="menu-tags"><span class="tag tag-green">SG</span><span class="tag tag-green">SL</span></div>
-      </div>
-      <div class="menu-card" style="border-color:rgba(191,150,101,0.35);">
-        <div class="menu-card-top">
-          <h3>Ube Latte</h3>
-          <span class="menu-price">5,00 €</span>
-        </div>
-        <p class="menu-desc">Lait, ube (igname violette des Philippines) — visuellement époustouflant.</p>
-        <div class="menu-tags"><span class="tag tag-star">⭐ Tendance</span><span class="tag tag-green">SL dispo</span></div>
-      </div>
-    </div>
-    <p class="menu-note">🍵 Matcha de cérémonie sélectionné — qualité premium, goût authentique</p>
-  </div>
-
-  <!-- SIGNATURES -->
-  <div class="tab-content" id="tab-signature">
-    <div class="menu-grid">
-      <div class="menu-card" style="border-color:rgba(191,150,101,0.35);">
-        <div class="menu-card-top">
-          <h3>Latte Caramel Beurre Salé</h3>
-          <span class="menu-price">5,90 €</span>
-        </div>
-        <p class="menu-desc">Café, lait, coulis caramel et sirop caramel beurre salé. Notre bestseller.</p>
-        <div class="menu-tags"><span class="tag tag-gold">★ Best-seller</span><span class="tag tag-hot">☕ Chaud & Froid</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Pistachio Latte</h3>
-          <span class="menu-price">5,90 €</span>
-        </div>
-        <p class="menu-desc">Café, lait crème de pistache et mousse de pistache. Gourmand et raffiné.</p>
-        <div class="menu-tags"><span class="tag tag-star">⭐ Tendance</span><span class="tag tag-hot">☕ Chaud & Froid</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Chai Latte</h3>
-          <span class="menu-price">5,50 €</span>
-        </div>
-        <p class="menu-desc">Poudre chai, lait et cannelle. Un voyage épicé et réconfortant.</p>
-        <div class="menu-tags"><span class="tag tag-green">SL dispo</span><span class="tag tag-green">SG</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Cinnamon Roll Latte</h3>
-          <span class="menu-price">6,10 €</span>
-        </div>
-        <p class="menu-desc">Café, lait, cannelle et mousse de vanille. Le goût d'un cinnamon roll dans votre tasse.</p>
-        <div class="menu-tags"><span class="tag tag-star">⭐ Nouveauté</span></div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-card-top">
-          <h3>Blueberry Ube Latte</h3>
-          <span class="menu-price">6,10 €</span>
-        </div>
-        <p class="menu-desc">Café, lait et purée de myrtilles et ube. Visuel extraordinaire, goût unique.</p>
-        <div class="menu-tags"><span class="tag tag-star">⭐ Signature</span><span class="tag tag-green">SL dispo</span></div>
-      </div>
-    </div>
-    <p class="menu-note">✨ Toutes nos boissons signature sont préparées à la commande avec amour</p>
-  </div>
-
-  <!-- PATISSERIES -->
-  <div class="tab-content" id="tab-patisserie">
-    <div style="text-align:center;padding:4rem 2rem;color:var(--text-muted);">
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style="margin:0 auto 1.5rem;display:block;opacity:0.3;"><rect x="8" y="32" width="48" height="20" rx="4" stroke="#496d45" stroke-width="1.5"/><path d="M16 32 Q20 20 32 20 Q44 20 48 32" stroke="#496d45" stroke-width="1.5" fill="none"/><circle cx="24" cy="28" r="3" stroke="#bf9665" stroke-width="1.5"/><circle cx="40" cy="28" r="3" stroke="#bf9665" stroke-width="1.5"/></svg>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--text);margin-bottom:0.5rem;">Pâtisseries Maison</p>
-      <p style="font-size:0.85rem;line-height:1.6;">Notre carte de pâtisseries change chaque semaine selon les saisons et l'inspiration.<br>Retrouvez notre sélection du jour en boutique — tout est fait maison, avec amour.</p>
-      <div style="margin-top:2rem;display:inline-block;background:var(--green-pale);padding:0.6rem 1.5rem;border-radius:100px;font-size:0.78rem;color:var(--green);font-weight:500;">Sélection renouvelée quotidiennement</div>
+<section id="about" style="background: var(--cream-dark);">
+  <h2 class="section-title">Deux passionnés, une <em>vision</em></h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 3rem; align-items: center;">
+    <p style="flex: 1; min-width: 300px; line-height: 1.8; font-size: 1.1rem;">Nous sommes <strong>Marjorie et Clément</strong>. Attirés par l'univers des baristas, nous avons importé la culture australienne à <strong>Leucate</strong>. Clément sélectionne les meilleurs grains de spécialité pour leur terroir, tandis que Marjorie assure une offre inclusive et gourmande (Sans Gluten & Sans Lactose). Un lieu pensé pour être esthétique, chaleureux et instagrammable.</p>
+    <div style="flex: 1; min-width: 300px;">
+        <img src="pexels-jack-atkinson-1289771108-24613535.jpg" alt="Passion du Latte Art - Clément MON latte" class="grid-image" style="height: 400px;">
     </div>
   </div>
 </section>
 
-<!-- AMBIANCE -->
-<section class="ambiance" id="ambiance">
-  <div class="section-label">L'univers</div>
-  <h2 class="section-title" style="max-width:500px;">Une <em>expérience</em><br>sensorielle complète</h2>
-
-  <div class="ambiance-grid">
-    <div class="ambiance-features">
-      <div class="ambiance-feature">
-        <div class="ambiance-feat-icon">🌸</div>
-        <div class="ambiance-feat-text">
-          <h4>Signature florale</h4>
-          <p>Des fleurs en façade et à l'intérieur créent une identité visuelle forte et un élément viral sur les réseaux sociaux.</p>
-        </div>
-      </div>
-      <div class="ambiance-feature">
-        <div class="ambiance-feat-icon">🏛</div>
-        <div class="ambiance-feat-text">
-          <h4>Arche architecturale</h4>
-          <p>Un effet architectural central qui ancre l'identité du lieu et crée la photo parfaite.</p>
-        </div>
-      </div>
-      <div class="ambiance-feature">
-        <div class="ambiance-feat-icon">🪞</div>
-        <div class="ambiance-feat-text">
-          <h4>Grand miroir & photo spot</h4>
-          <p>Agrandit visuellement l'espace et devient le point de rassemblement pour vos photos Instagram.</p>
-        </div>
-      </div>
-      <div class="ambiance-feature">
-        <div class="ambiance-feat-icon">🌐</div>
-        <div class="ambiance-feat-text">
-          <h4>WiFi & prises disponibles</h4>
-          <p>Un espace de travail accueillant pour les freelances et télétravailleurs.</p>
-        </div>
-      </div>
-      <div class="ambiance-feature">
-        <div class="ambiance-feat-icon">🥐</div>
-        <div class="ambiance-feat-text">
-          <h4>Vitrine pâtisserie</h4>
-          <p>Des créations maison exposées pour éveiller la gourmandise et inciter à la découverte.</p>
-        </div>
-      </div>
+<section id="menu">
+  <h2 class="section-title">Nos <em>créations</em> signatures</h2>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="IMG_5773.jpg" alt="Matcha Fraise" class="grid-image">
+      <div class="menu-price">5,90 €</div>
+      <h3>Matcha Fraise</h3>
+      <p>Matcha de cérémonie premium, lait et purée de fraise. Visuel époustouflant et équilibre parfait.</p>
     </div>
-
-    <div class="ambiance-photos">
-      <div class="ambiance-photo">
-        <div class="photo-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="32" height="32" rx="4" stroke="white" stroke-width="1"/><circle cx="20" cy="18" r="7" stroke="white" stroke-width="1"/><path d="M12 36 Q20 28 28 36" stroke="white" stroke-width="1" fill="none"/></svg>
-          <p>Vue intérieure</p>
-        </div>
-        <span class="photo-label">L'ambiance</span>
-      </div>
-      <div class="ambiance-photo">
-        <div class="photo-placeholder">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M8 24 L8 10 L24 10 L24 24 Z" stroke="white" stroke-width="1" fill="none"/><path d="M12 10 L12 6 L20 6 L20 10" stroke="white" stroke-width="1" fill="none"/></svg>
-          <p>La façade</p>
-        </div>
-        <span class="photo-label">Extérieur</span>
-      </div>
-      <div class="ambiance-photo">
-        <div class="photo-placeholder">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="white" stroke-width="1"/><ellipse cx="16" cy="26" rx="10" ry="3" stroke="white" stroke-width="1"/></svg>
-          <p>Le comptoir</p>
-        </div>
-        <span class="photo-label">Barista</span>
-      </div>
+    <div class="menu-card">
+      <img src="D9010762-D902-4D16-9811-A03AA862553F.jpg" alt="Matcha Latte" class="grid-image">
+      <div class="menu-price">5,00 €</div>
+      <h3>Matcha Latte</h3>
+      <p>La base incontournable, douce et végétale, servie dans notre verrerie design.</p>
+    </div>
+    <div class="menu-card">
+      <img src="5E7EBD91-6506-4AB9-857A-575920DDADE8.jpg" alt="Latte Caramel Beurre Salé" class="grid-image">
+      <div class="menu-price">5,90 €</div>
+      <h3>Latte Caramel</h3>
+      <p>Café de spécialité, lait, et délicieux nappage au caramel beurre salé. Notre best-seller.</p>
+    </div>
+    <div class="menu-card">
+        <img src="IMG_5564.jpg" alt="Cinnamon Roll Latte" class="grid-image">
+        <div class="menu-price">6,10 €</div>
+        <h3>Cinnamon Latte</h3>
+        <p>L'alliance gourmande et réconfortante de la cannelle et d'une mousse onctueuse.</p>
+    </div>
+    <div class="menu-card">
+        <img src="pexels-rodrigo-ortega-2044210904-30119453.jpg" alt="Latte Art Classique" class="grid-image">
+        <div class="menu-price">4,50 €</div>
+        <h3>Latte Art Classique</h3>
+        <p>Espresso de spécialité et lait texturé avec art par notre barista.</p>
     </div>
   </div>
 </section>
 
-<!-- SEASONAL STRIP -->
-<div class="seasonal">
-  <div>
-    <h2>Leucate,<br>une ville à <em>double marché</em></h2>
-    <p>Clientèle locale fidèle à l'année + afflux touristique estival massif. Notre coffee shop s'adapte à chaque saison avec une carte évolutive et des événements commerciaux pensés pour fidéliser et surprendre.</p>
-  </div>
-  <div class="seasonal-cta">
-    <span class="big-num">2</span>
-    <div style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:0.5rem;">marchés complémentaires</div>
-  </div>
-</div>
-
-<!-- LOCATION -->
-<section class="location" id="location">
-  <div class="location-info">
-    <div class="section-label">Où nous trouver</div>
-    <h2 class="section-title">Au cœur de<br><em>Leucate</em></h2>
-    <p>Nous sommes en cours d'implantation dans le centre de Leucate, à deux pas des plages et du marché. Un emplacement stratégique pour capter les résidents locaux et les touristes de passage.</p>
-    <p>Leucate, 11370 — Pyrénées-Orientales. Village balnéaire dynamique avec 12 596 habitants et un afflux de 80 000 à 100 000 visiteurs chaque été.</p>
-
-    <div class="location-details">
-      <div class="location-detail-card">
-        <div class="ldc-label">Horaires d'ouverture</div>
-        <div class="ldc-value">Lun — Dim<br>7h30 – 18h30</div>
-      </div>
-      <div class="location-detail-card">
-        <div class="ldc-label">Contact</div>
-        <div class="ldc-value">Instagram<br>@monlatte_leucate</div>
-      </div>
-      <div class="location-detail-card">
-        <div class="ldc-label">Options</div>
-        <div class="ldc-value">Sur place<br>À emporter</div>
-      </div>
-      <div class="location-detail-card">
-        <div class="ldc-label">À venir</div>
-        <div class="ldc-value">Click & Collect<br>Too Good To Go</div>
-      </div>
+<section id="ambiance" style="background: var(--blush);">
+    <h2 class="section-title">L'<em>expérience</em> MON latte</h2>
+    <p style="color: var(--text-mid); max-width: 600px; margin-bottom: 2rem;">Un lieu de vie hybride conjuguant socialisation et détente, pensé pour l'éveil des sens avec une architecture épurée et l'arôme du café fraîchement torréfié.</p>
+    <div class="ambiance-grid">
+        <img src="B7F518E6-ABDB-497C-852A-D5039D533D1F.jpg" alt="Ambiance intérieure MON latte" class="grid-image" style="height: 350px;">
+        <img src="IMG_5838.jpg" alt="Service sur plateau en bois" class="grid-image" style="height: 350px;">
     </div>
-  </div>
+</section>
 
-  <div class="map-placeholder">
-    <div class="map-bg"></div>
-    <div class="map-pin"><div class="map-pin-inner"></div></div>
-    <div class="map-label">MON latte — Leucate</div>
+<section id="location" style="background: var(--green); color: white;">
+  <h2 class="section-title" style="color: white;">Nous <em>trouver</em></h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <p style="font-size: 1.5rem; margin-bottom: 1rem;">Village de Leucate, 11370</p>
+      <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Ouvert 7j/7 de 7h30 à 18h30</p>
+      <p style="font-size: 1.1rem; margin-bottom: 2rem;">Options : Sur place ou à emporter</p>
+      <p style="font-weight: bold; font-size: 1.2rem;">Suivez-nous sur Instagram :</p>
+      <p style="font-size: 1.2rem; color: var(--gold-light);">@monlatte_leucate</p>
+    </div>
+    <div style="height: 350px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23348.614482595015!2d3.011681283626786!3d42.9123019183921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b06f0e95ffeb09%3A0x4078821166b42b0!2s11370%20Leucate!5e0!3m2!1sfr!2sfr!4v1714000000000!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-top">
+  <div class="footer-grid">
     <div>
-      <div class="footer-brand">MON <span>latte</span></div>
-      <p class="footer-tagline">Un coffee shop moderne et chaleureux, inspiré des grandes cultures café du monde, ancré dans le terroir méditerranéen des Pyrénées-Orientales.</p>
+      <img src="1.png" alt="Logo MON latte footer" style="height: 50px; filter: brightness(0) invert(1); opacity: 0.8; margin-bottom: 1rem;">
+      <p style="color: rgba(255,255,255,0.6);">Le nouveau rendez-vous gourmand de Leucate.</p>
     </div>
     <div>
-      <h4>La carte</h4>
-      <ul>
-        <li>Classiques</li>
-        <li>Lattés</li>
-        <li>Matcha & Ube</li>
-        <li>Signatures</li>
-        <li>Pâtisseries maison</li>
-      </ul>
+      <h4 style="color: var(--gold-light); margin-bottom: 1rem;">La Carte</h4>
+      <p style="color: rgba(255,255,255,0.6); line-height: 1.8;">Signatures<br>Matcha & Ube<br>Pâtisseries Maison</p>
     </div>
     <div>
-      <h4>Informations</h4>
-      <ul>
-        <li>Leucate, 11370</li>
-        <li>Pyrénées-Orientales</li>
-        <li><a href="#">@monlatte_leucate</a></li>
-        <li>Ouvert 7j/7</li>
-        <li><a href="#">Bar nomade & événements</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <span>© 2025 MON latte — Marjorie & Clément · Tous droits réservés</span>
-    <div class="socials">
-      <a href="#" class="social-pill">Instagram</a>
-      <a href="#" class="social-pill">TikTok</a>
+      <h4 style="color: var(--gold-light); margin-bottom: 1rem;">Infos</h4>
+      <p style="color: rgba(255,255,255,0.6); line-height: 1.8;">11370 Leucate<br>© 2026 Marjorie & Clément</p>
     </div>
   </div>
 </footer>
 
-<script>
-  function switchTab(id) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    event.target.classList.add('active');
-  }
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    if (window.scrollY > 60) {
-      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.06)';
-    } else {
-      nav.style.boxShadow = 'none';
-    }
-  });
-</script>
 </body>
 </html>
