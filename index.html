@@ -1,210 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MON latte — Coffee Shop · Leucate</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-  /* --- TES VARIABLES DE COULEURS (DA Business Plan) --- */
-  :root {
-    --green: #496d45;
-    --green-light: #6a9865;
-    --gold: #bf9665;
-    --cream: #faf7f2;
-    --cream-dark: #f2ede4;
-    --blush: #fff0f0;
-    --text: #1a1a18;
-    --text-mid: #4a4a45;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
-
-  /* NAVIGATION */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 3rem; background: rgba(250, 247, 242, 0.95);
-    backdrop-filter: blur(10px); border-bottom: 1px solid rgba(191,150,101,0.15);
-  }
-  .nav-logo img { height: 60px; object-fit: contain; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center;}
-  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
-  .nav-cta { background: var(--green); color: white !important; padding: 0.6rem 1.2rem; border-radius: 50px; }
-
-  /* HERO SECTION (ACCUEIL) */
-  .hero { min-height: 100vh; display: flex; flex-wrap: wrap; padding-top: 80px; }
-  .hero-left { flex: 1; min-width: 350px; padding: 4rem 5rem; display: flex; flex-direction: column; justify-content: center; }
-  .hero-right { flex: 1.2; min-width: 350px; position: relative; }
-  .hero-img { width: 100%; height: 100%; object-fit: cover; border-bottom-left-radius: 40px; }
-
-  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; }
-  .hero h1 span.script { font-style: italic; color: var(--green); }
-  .hero h1 span.gold { color: var(--gold); }
-  
-  .btn-primary { background: var(--green); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; display: inline-block; margin-right: 1rem; transition: 0.3s; }
-  .btn-primary:hover { background: var(--green-light); transform: translateY(-3px); }
-
-  /* SECTIONS */
-  section { padding: 5rem 10%; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 3rem; margin-bottom: 2rem; }
-  .section-title em { font-style: italic; color: var(--green); }
-
-  /* GRID CARDS (MENU) */
-  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
-  .menu-card { background: white; padding: 1.5rem; border-radius: 20px; border: 1px solid var(--cream-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.03); display: flex; flex-direction: column; transition: transform 0.3s;}
-  .menu-card:hover { transform: translateY(-5px); }
-  .menu-price { color: var(--gold); font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem; text-align: right;}
-  .menu-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 0.5rem;}
-  .menu-card p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.5; flex-grow: 1;}
-  
-  /* IMAGES */
-  .grid-image { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 1rem; }
-  .ambiance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-
-  /* FOOTER */
-  footer { background: var(--text); color: white; padding: 4rem 10% 2rem; }
-  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; border-bottom: 1px solid #333; padding-bottom: 3rem; }
-
-  /* MOBILE RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem; }
-    .nav-links { display: none; }
-    .hero-left { padding: 2rem; }
-    section { padding: 3rem 5%; }
-    .hero-right { min-height: 50vh; }
-    .hero-img { border-bottom-left-radius: 0px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MON latte — Coffee Shop · Leucate</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav>
+        <a href="#" class="nav-logo"><img src="1.png" alt="Logo MON latte"></a>
+        <ul class="nav-links">
+            <li><a href="#about">Histoire</a></li>
+            <li><a href="#menu">La Carte</a></li>
+            <li><a href="#location">Nous Trouver</a></li>
+            <li><a href="#menu" class="nav-cta">Découvrir</a></li>
+        </ul>
+    </nav>
 
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="1.png" alt="Logo MON latte">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#about">Histoire</a></li>
-    <li><a href="#menu">La Carte</a></li>
-    <li><a href="#ambiance">Ambiance</a></li>
-    <li><a href="#location">Nous Trouver</a></li>
-    <li><a href="#menu" class="nav-cta">Découvrir</a></li>
-  </ul>
-</nav>
+    <section class="hero">
+        <div class="hero-left">
+            <div style="color:var(--green); font-weight:bold; letter-spacing:2px; margin-bottom:1rem;">COFFEE SHOP · LEUCATE</div>
+            <h1>L'art du café à la <span style="font-style:italic; color:var(--green);">française</span></h1>
+            <p>Un univers gourmand inspiré des coffee shops australiens, au cœur de Leucate village.</p>
+        </div>
+        <div class="hero-right">
+            <img src="F476DB8E-03F7-45B4-91B1-C2C987DA9DC6.jpg" class="hero-img" alt="MON latte intérieur">
+        </div>
+    </section>
 
-<section class="hero" style="padding-right: 0;">
-  <div class="hero-left">
-    <div style="color:var(--green); font-weight: bold; letter-spacing: 2px; margin-bottom: 1rem; text-transform: uppercase;">Coffee Shop · Leucate</div>
-    <h1>L'art du <span class="script">café</span><br> à la <span class="gold">française</span></h1>
-    <p style="font-size: 1.2rem; color: var(--text-mid); margin-bottom: 2rem;">Un univers gourmand inspiré des coffee shops australiens, au cœur de Leucate village.</p>
-    <div>
-      <a href="#menu" class="btn-primary">Découvrir la carte</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <img src="F476DB8E-03F7-45B4-91B1-C2C987DA9DC6.jpg" alt="Intérieur MON latte Leucate" class="hero-img">
-  </div>
-</section>
+    <section id="menu">
+        <h2 style="text-align:center; font-family:'Cormorant Garamond'; font-size:3rem; margin-bottom:3rem;">Nos <span style="font-style:italic;">Signatures</span></h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="IMG_5838.jpg" alt="Ube Latte">
+                <h3>Ube Latte Signature</h3>
+                <p class="menu-price">5,90 €</p>
+            </div>
+            <div class="menu-card">
+                <img src="IMG_5773.jpg" alt="Matcha Latte">
+                <h3>Matcha Fraise</h3>
+                <p class="menu-price">5,90 €</p>
+            </div>
+            <div class="menu-card">
+                <img src="5E7EBD91-6506-4AB9-857A-575920DDADE8.jpg" alt="Latte Caramel">
+                <h3>Latte Caramel Beurre Salé</h3>
+                <p class="menu-price">5,90 €</p>
+            </div>
+        </div>
+    </section>
 
-<section id="about" style="background: var(--cream-dark);">
-  <h2 class="section-title">Deux passionnés, une <em>vision</em></h2>
-  <div style="display: flex; flex-wrap: wrap; gap: 3rem; align-items: center;">
-    <p style="flex: 1; min-width: 300px; line-height: 1.8; font-size: 1.1rem;">Nous sommes <strong>Marjorie et Clément</strong>. Attirés par l'univers des baristas, nous avons importé la culture australienne à <strong>Leucate</strong>. Clément sélectionne les meilleurs grains de spécialité pour leur terroir, tandis que Marjorie assure une offre inclusive et gourmande (Sans Gluten & Sans Lactose). Un lieu pensé pour être esthétique, chaleureux et instagrammable.</p>
-    <div style="flex: 1; min-width: 300px;">
-        <img src="pexels-jack-atkinson-1289771108-24613535.jpg" alt="Passion du Latte Art - Clément MON latte" class="grid-image" style="height: 400px;">
-    </div>
-  </div>
-</section>
-
-<section id="menu">
-  <h2 class="section-title">Nos <em>créations</em> signatures</h2>
-  <div class="menu-grid">
-    <div class="menu-card">
-      <img src="IMG_5773.jpg" alt="Matcha Fraise" class="grid-image">
-      <div class="menu-price">5,90 €</div>
-      <h3>Matcha Fraise</h3>
-      <p>Matcha de cérémonie premium, lait et purée de fraise. Visuel époustouflant et équilibre parfait.</p>
-    </div>
-    <div class="menu-card">
-      <img src="D9010762-D902-4D16-9811-A03AA862553F.jpg" alt="Matcha Latte" class="grid-image">
-      <div class="menu-price">5,00 €</div>
-      <h3>Matcha Latte</h3>
-      <p>La base incontournable, douce et végétale, servie dans notre verrerie design.</p>
-    </div>
-    <div class="menu-card">
-      <img src="5E7EBD91-6506-4AB9-857A-575920DDADE8.jpg" alt="Latte Caramel Beurre Salé" class="grid-image">
-      <div class="menu-price">5,90 €</div>
-      <h3>Latte Caramel</h3>
-      <p>Café de spécialité, lait, et délicieux nappage au caramel beurre salé. Notre best-seller.</p>
-    </div>
-    <div class="menu-card">
-        <img src="IMG_5564.jpg" alt="Cinnamon Roll Latte" class="grid-image">
-        <div class="menu-price">6,10 €</div>
-        <h3>Cinnamon Latte</h3>
-        <p>L'alliance gourmande et réconfortante de la cannelle et d'une mousse onctueuse.</p>
-    </div>
-    <div class="menu-card">
-        <img src="pexels-rodrigo-ortega-2044210904-30119453.jpg" alt="Latte Art Classique" class="grid-image">
-        <div class="menu-price">4,50 €</div>
-        <h3>Latte Art Classique</h3>
-        <p>Espresso de spécialité et lait texturé avec art par notre barista.</p>
-    </div>
-  </div>
-</section>
-
-<section id="ambiance" style="background: var(--blush);">
-    <h2 class="section-title">L'<em>expérience</em> MON latte</h2>
-    <p style="color: var(--text-mid); max-width: 600px; margin-bottom: 2rem;">Un lieu de vie hybride conjuguant socialisation et détente, pensé pour l'éveil des sens avec une architecture épurée et l'arôme du café fraîchement torréfié.</p>
-    <div class="ambiance-grid">
-        <img src="B7F518E6-ABDB-497C-852A-D5039D533D1F.jpg" alt="Ambiance intérieure MON latte" class="grid-image" style="height: 350px;">
-        <img src="IMG_5838.jpg" alt="Service sur plateau en bois" class="grid-image" style="height: 350px;">
-    </div>
-</section>
-
-<section id="location" style="background: var(--green); color: white;">
-  <h2 class="section-title" style="color: white;">Nous <em>trouver</em></h2>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
-    <div style="display: flex; flex-direction: column; justify-content: center;">
-      <p style="font-size: 1.5rem; margin-bottom: 1rem;">Village de Leucate, 11370</p>
-      <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">Ouvert 7j/7 de 7h30 à 18h30</p>
-      <p style="font-size: 1.1rem; margin-bottom: 2rem;">Options : Sur place ou à emporter</p>
-      <p style="font-weight: bold; font-size: 1.2rem;">Suivez-nous sur Instagram :</p>
-      <p style="font-size: 1.2rem; color: var(--gold-light);">@monlatte_leucate</p>
-    </div>
-    <div style="height: 350px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
-     <iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11656.402287413645!2d3.016393527265905!3d42.909772837775955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b07043831776c5%3A0x407882116124500!2s11370%20Leucate!5e0!3m2!1sfr!2sfr!4v1713878200000!5m2!1sfr!2sfr" 
-  width="100%" 
-  height="100%" 
-  style="border:0;" 
-  allowfullscreen="" 
-  loading="lazy" 
-  referrerpolicy="no-referrer-when-downgrade">
-</iframe>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-grid">
-    <div>
-      <img src="1.png" alt="Logo MON latte footer" style="height: 50px; filter: brightness(0) invert(1); opacity: 0.8; margin-bottom: 1rem;">
-      <p style="color: rgba(255,255,255,0.6);">Le nouveau rendez-vous gourmand de Leucate.</p>
-    </div>
-    <div>
-      <h4 style="color: var(--gold-light); margin-bottom: 1rem;">La Carte</h4>
-      <p style="color: rgba(255,255,255,0.6); line-height: 1.8;">Signatures<br>Matcha & Ube<br>Pâtisseries Maison</p>
-    </div>
-    <div>
-      <h4 style="color: var(--gold-light); margin-bottom: 1rem;">Infos</h4>
-      <p style="color: rgba(255,255,255,0.6); line-height: 1.8;">11370 Leucate<br>© 2026 Marjorie & Clément</p>
-    </div>
-  </div>
-</footer>
-
+    <section id="location" style="padding: 5rem 10%; background:var(--green); color:white;">
+        <h2 style="font-family:'Cormorant Garamond'; font-size:3rem; margin-bottom:1rem;">Nous <span style="font-style:italic;">trouver</span></h2>
+        <p>Village de Leucate, 11370 · Ouvert 7j/7 de 7h30 à 18h30</p>
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2914.568461765039!2d3.0253457123447!3d43.06416187103445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b069695648f80b%3A0xc3160b73c24b980b!2sLeucate!5e0!3m2!1sfr!2sfr!4v1713880000000!5m2!1sfr!2sfr" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
 </body>
 </html>
