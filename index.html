@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MON latte — Coffee Shop · Leucate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- LA DIRECTION ARTISTIQUE --- */
         :root {
             --green: #496d45;
             --green-light: #6a9865;
+            --green-pale: #e8f0e7;
             --gold: #bf9665;
+            --gold-light: #d4b48a;
+            --blush: #fff0f0;
             --cream: #faf7f2;
             --cream-dark: #f2ede4;
             --text: #1a1a18;
             --text-mid: #4a4a45;
+            --border: #e6e6e0;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
 
-        /* --- ANIMATION DE LA MASCOTTE (LOGO) --- */
+        /* --- ANIMATIONS & INTERACTIONS --- */
         @keyframes floatMascot {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(3deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
@@ -45,9 +49,9 @@
         }
         .nav-logo img:hover { transform: scale(1.15) rotate(-3deg); animation-play-state: paused; }
         
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
         .nav-links a { 
-            text-decoration: none; color: var(--text); font-size: 0.85rem; 
+            text-decoration: none; color: var(--text); font-size: 0.82rem; 
             text-transform: uppercase; font-weight: 500; letter-spacing: 1px;
             transition: color 0.3s ease; position: relative;
         }
@@ -57,6 +61,7 @@
             padding: 0.8rem 1.8rem; border-radius: 50px; 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             box-shadow: 0 4px 15px rgba(73, 109, 69, 0.2);
+            font-size: 0.82rem;
         }
         .nav-cta:hover { background: var(--gold); transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 25px rgba(191, 150, 101, 0.4); }
 
@@ -67,32 +72,73 @@
         .hero-img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; border-bottom-left-radius: 30px; }
         .hero-right:hover .hero-img { transform: scale(1.04); }
 
-        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5rem); line-height: 1.05; margin-bottom: 1.5rem; color: var(--text); }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 5rem); line-height: 1.05; margin-bottom: 1.5rem; color: var(--text); }
         .hero p { font-size: 1.15rem; line-height: 1.6; margin-bottom: 2.5rem; color: var(--text-mid); }
         
         /* --- TITRES SECTIONS --- */
-        .section-title { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; margin: 4rem 0 1rem; color: var(--green); }
-        .section-title span { font-style: italic; color: var(--gold); }
-        .section-subtitle { text-align: center; font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-mid); margin-bottom: 3rem; }
+        .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+        .section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); display: block; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; color: var(--text); }
+        .section-title span { font-style: italic; color: var(--green); }
+        .section-subtitle { font-size: 1rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-mid); margin-bottom: 3rem; }
 
-        /* --- CARTES PHOTOS (HIGHLIGHTS) --- */
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2.5rem; padding: 1rem 10% 4rem; }
-        .menu-card { 
+        /* --- HISTOIRE (Concept Hybride) --- */
+        .about-section { 
+            padding: 6rem 10%; 
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: center; 
+            background: url("https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=2000") no-repeat center/cover; 
+            color: white; border-radius: 40px; margin: 4rem 1rem; box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
+        }
+        .about-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 1.5rem; color: white; line-height: 1.1; }
+        .about-text p { font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem; color: rgba(255,255,255,0.9); }
+        .about-text h3 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-top: 2rem;}
+        .about-image { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .about-image img { width: 100%; height: 280px; object-fit: cover; border-radius: 20px; border: 3px solid rgba(255,255,255,0.3); transition: transform 0.3s ease;}
+        .about-image img:hover { transform: scale(1.05); }
+
+        /* --- GALERIE AMBIANCE --- */
+        .ambiance-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; padding: 1rem 10%; }
+        .grid-image { width: 100%; height: 320px; object-fit: cover; border-radius: 12px; transition: transform 0.4s ease, box-shadow 0.4s ease; cursor: pointer; border: 1px solid var(--border); }
+        .grid-image:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+
+        /* --- SLIDER DES SIGNATURES (Pro UX) --- */
+        .slider-container { padding: 1rem 0 4rem 10%; } /* On garde une marge à gauche, mais on laisse déborder à droite */
+        
+        .highlights-slider { 
+            display: flex; 
+            gap: 2rem; 
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-right: 10%; /* Pour ne pas couper la dernière carte au bord de l'écran */
+            padding-bottom: 2rem; /* Pour l'ombre */
+        }
+        
+        /* Cacher la scrollbar (Chrome, Safari, Firefox, IE) */
+        .highlights-slider::-webkit-scrollbar { display: none; }
+        .highlights-slider { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .highlights-card { 
+            flex: 0 0 300px; /* La largeur fixe de chaque carte */
+            scroll-snap-align: start; /* S'aimante au bord gauche */
             background: white; padding: 1.2rem; border-radius: 24px; 
             box-shadow: 0 8px 20px rgba(0,0,0,0.04); text-align: center; 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(191,150,101,0.1);
+            border: 1px solid var(--border);
             cursor: pointer;
         }
-        .menu-card:hover { 
+        .highlights-card:hover { 
             transform: translateY(-15px); 
             box-shadow: 0 25px 50px rgba(73, 109, 69, 0.15); 
-            border-color: rgba(191, 150, 101, 0.4);
+            border-color: var(--gold);
         }
-        .menu-card img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 1.5rem; transition: transform 0.5s ease; }
-        .menu-card:hover img { transform: scale(1.05); }
-        .menu-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--text); }
-        .menu-price { color: var(--gold); font-weight: 700; font-size: 1.3rem; margin-top: 10px; }
+        .highlights-card img { width: 100%; height: 300px; object-fit: cover; border-radius: 16px; margin-bottom: 1.5rem; transition: transform 0.5s ease; }
+        .highlights-card:hover img { transform: scale(1.05); }
+        .highlights-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--text); }
+        .highlights-price { color: var(--gold); font-weight: 700; font-size: 1.3rem; margin-top: 10px; }
+
+        .swipe-hint { color: var(--gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 2rem; }
 
         /* --- LA CARTE COMPLÈTE (MENU TEXTE) --- */
         .full-menu-section { background: var(--cream-dark); padding: 5rem 10%; border-radius: 40px 40px 0 0; }
@@ -107,7 +153,6 @@
         .menu-item-desc { font-size: 0.85rem; color: var(--text-mid); font-style: italic; }
 
         /* --- CARTE MAPS --- */
-        .location-section { padding: 6rem 10%; background: white; }
         .map-container { 
             height: 450px; border-radius: 30px; overflow: hidden; 
             margin-top: 3rem; box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
@@ -119,12 +164,20 @@
         /* --- FOOTER --- */
         footer { background: var(--text); color: white; padding: 5rem 10% 3rem; text-align: center; }
 
+        @media (max-width: 1024px) {
+            .about-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 5%; }
+            .about-image { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero-left { padding: 3rem 2rem; text-align: center; align-items: center; }
             .hero-right { min-height: 40vh; }
-            .hero h1 { font-size: 2.8rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2.8rem; }
             .full-menu-section { border-radius: 20px 20px 0 0; padding: 4rem 5%; }
+            .slider-container { padding-left: 5%; }
+            .highlights-card { flex: 0 0 260px; } /* Plus fin sur mobile pour voir le suivant */
         }
     </style>
 </head>
@@ -132,18 +185,19 @@
     <nav>
         <a href="#" class="nav-logo"><img src="1.png" alt="Mascotte MON latte"></a>
         <ul class="nav-links">
-            <li><a href="#galerie">En images</a></li>
-            <li><a href="#menu-complet">La Carte</a></li>
+            <li><a href="#about">Notre histoire</a></li>
+            <li><a href="#ambiance">MON univers</a></li>
+            <li><a href="#galerie">Les Signatures</a></li>
             <li><a href="#location">Nous Trouver</a></li>
-            <li><a href="#menu-complet" class="nav-cta">Commander</a></li>
+            <li><a href="#menu-complet" class="nav-cta">La Carte</a></li>
         </ul>
     </nav>
 
     <section class="hero">
         <div class="hero-left">
-            <div style="color:var(--gold); font-weight:bold; letter-spacing:3px; margin-bottom:1rem; font-size: 0.85rem; text-transform: uppercase;">Coffee Shop · Leucate</div>
-            <h1>L'art du café à la <span style="font-style:italic; color:var(--green);">française</span></h1>
-            <p>Un univers gourmand, inclusif et réconfortant, niché au cœur de Leucate village. Spécialités café, matcha et pâtisseries maison.</p>
+            <div class="section-label">Coffee Shop · Leucate</div>
+            <h1>L'art du café à la <span class="script">française</span></h1>
+            <p>Un univers gourmand, inclusif et réconfortant, inspiré par l'Australie, niché au cœur de Leucate village. Spécialités café, matcha et pâtisseries maison.</p>
             <a href="#menu-complet" class="nav-cta" style="width: max-content; display: inline-block; font-size: 1.1rem;">Découvrir la carte</a>
         </div>
         <div class="hero-right">
@@ -151,47 +205,78 @@
         </div>
     </section>
 
-    <section id="galerie">
-        <h2 class="section-title">Nos <span>Incontournables</span></h2>
-        <p class="section-subtitle">Le plaisir des yeux avant tout</p>
+    <section id="about" class="about-section">
+        <div class="about-text">
+            <h3>Deux passionnés, une <em>vision</em></h3>
+            <h2>Du café de spécialité à Leucate</h2>
+            <p>Nous sommes Marjorie et Clément, deux amoureux de l'univers barista. Notre rêve ? Importer à Leucate la culture gourmande et inclusive des coffee shops australiens, en y insufflant le charme méditerranéen et l'esthétique épurée des tendances "Pinterest".</p>
+            <p><strong>MON latte</strong> est un concept hybride : un lieu de vie cosy où l'on socialise, télétravaille ou se détend en écoutant Marjorie créer des chefs-d'œuvre de Latte Art (exclusivement Sans Gluten & Sans Lactose !), pendant que Clément sélectionne méticuleusement les meilleurs grains torréfiés sur place.</p>
+            <p>Un espace pensé pour l'éveil des sens et pour vos plus beaux clichés Instagram.</p>
+        </div>
+        <div class="about-image">
+            <img src="pexels-jack-atkinson-1289771108-24613535.jpg" alt="Passion du Latte Art" style="grid-column: 1 / -1; height: 320px;">
+        </div>
+    </section>
+
+    <section id="ambiance">
+        <div style="text-align: center;">
+            <div class="section-label" style="justify-content: center; margin-bottom: 0;">MON univers</div>
+            <h2 class="section-title">Cosy, Chill & <span>Fleurie</span></h2>
+            <p class="section-subtitle" style="margin-bottom: 2rem;">Chaque coin est une invitation à la détente</p>
+        </div>
         
-        <div class="menu-grid">
-            <div class="menu-card">
-                <img src="5E7EBD91-6506-4AB9-857A-575920DDADE8.jpg" alt="Latte Caramel Beurre Salé">
-                <h3>Latte Caramel</h3>
-                <p class="menu-price">5,90 €</p>
-            </div>
-            <div class="menu-card">
-                <img src="927DD24A-6830-47EA-9C99-4D6D8DE19892.jpg" alt="Cinnamon Roll Latte">
-                <h3>Cinnamon Roll</h3>
-                <p class="menu-price">6,10 €</p>
-            </div>
-            <div class="menu-card">
-                <img src="IMG_5838.jpg" alt="Ube Latte">
-                <h3>Ube Latte</h3>
-                <p class="menu-price">5,00 €</p>
-            </div>
-            <div class="menu-card">
-                <img src="D9010762-D902-4D16-9811-A03AA862553F.jpg" alt="Matcha Latte">
-                <h3>Matcha Latte</h3>
-                <p class="menu-price">5,00 €</p>
-            </div>
-            <div class="menu-card">
-                <img src="IMG_5773.jpg" alt="Matcha Fraise">
-                <h3>Matcha Fraise</h3>
-                <p class="menu-price">5,90 €</p>
-            </div>
-            <div class="menu-card">
-                <img src="pexels-rodrigo-ortega-2044210904-30119453.jpg" alt="Latte Art">
-                <h3>Latte Art Classique</h3>
-                <p class="menu-price">4,50 €</p>
+        <div class="ambiance-grid">
+            <img src="B7F518E6-ABDB-497C-852A-D5039D533D1F.jpg" alt="Intérieur cosy et chill - Le coin salon" class="grid-image">
+            <img src="F476DB8E-03F7-45B4-91B1-C2C987DA9DC6.jpg" alt="Comptoir barista et Latte Art" class="grid-image">
+        </div>
+    </section>
+
+    <section id="galerie">
+        <div style="text-align: center; padding-top: 2rem;">
+            <h2 class="section-title" style="margin-bottom: 0.5rem;">Les <span>Signatures</span></h2>
+            <span class="swipe-hint">Faites glisser pour découvrir ➔</span>
+        </div>
+        
+        <div class="slider-container">
+            <div class="highlights-slider">
+                <div class="highlights-card">
+                    <img src="5E7EBD91-6506-4AB9-857A-575920DDADE8.jpg" alt="Latte Caramel Beurre Salé">
+                    <h3>Latte Caramel</h3>
+                    <p class="highlights-price">5,90 €</p>
+                </div>
+                <div class="highlights-card">
+                    <img src="IMG_5838.jpg" alt="Cinnamon Roll Latte">
+                    <h3>Cinnamon Roll</h3>
+                    <p class="highlights-price">6,10 €</p>
+                </div>
+                <div class="highlights-card">
+                    <img src="IMG_5785.jpg" alt="Ube Latte">
+                    <h3>Ube Latte</h3>
+                    <p class="highlights-price">5,00 €</p>
+                </div>
+                <div class="highlights-card">
+                    <img src="IMG_5773.jpg" alt="Matcha Latte">
+                    <h3>Matcha Latte</h3>
+                    <p class="highlights-price">5,00 €</p>
+                </div>
+                <div class="highlights-card">
+                    <img src="D9010762-D902-4D16-9811-A03AA862553F.jpg" alt="Pistachio Latte">
+                    <h3>Pistachio Latte</h3>
+                    <p class="highlights-price">5,90 €</p>
+                </div>
+                <div class="highlights-card">
+                    <img src="IMG_5910.jpg" alt="Blue Latte">
+                    <h3>Blue Latte</h3>
+                    <p class="highlights-price">6,10 €</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="menu-complet" class="full-menu-section">
-        <h2 class="section-title" style="margin-top: 0;">La Carte <span>Complète</span></h2>
-        <p class="section-subtitle">Sur place ou à emporter · Lait végétal avoine sans supplément</p>
+        <div class="section-label" style="justify-content: center; margin-bottom: 0;">Toute la carte</div>
+        <h2 class="section-title" style="margin-top: 0; text-align: center;">MON <span>Menu</span></h2>
+        <p class="section-subtitle" style="text-align: center;">Sur place ou à emporter · Lait végétal d'avoine sans supplément</p>
 
         <div class="full-menu">
             <div>
@@ -200,7 +285,7 @@
                     <ul>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Espresso</span><span class="menu-item-price">2,50 € / 3,50 €</span></div>
-                            <span class="menu-item-desc">Simple ou Double</span>
+                            <span class="menu-item-desc">Simple ou Double (Origines sélectionnées)</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Americano</span><span class="menu-item-price">3,50 €</span></div>
@@ -210,7 +295,7 @@
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Cold Brew</span><span class="menu-item-price">4,00 €</span></div>
-                            <span class="menu-item-desc">Fait en méthode douce</span>
+                            <span class="menu-item-desc">Infusion lente pendant 12h (méthode douce)</span>
                         </li>
                     </ul>
                 </div>
@@ -242,18 +327,18 @@
                     <h4>Matcha & Ube</h4>
                     <ul>
                         <li>
-                            <div class="menu-item-header"><span class="menu-item-name">Matcha Latte</span><span class="menu-item-price">5,00 €</span></div>
+                            <div class="menu-item-header"><span class="menu-item-name">Matcha Latte (Cérémonie)</span><span class="menu-item-price">5,00 €</span></div>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Matcha Vanilla</span><span class="menu-item-price">5,90 €</span></div>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Matcha Fraise</span><span class="menu-item-price">5,90 €</span></div>
-                            <span class="menu-item-desc">Matcha de cérémonie, lait, purée de fraise</span>
+                            <span class="menu-item-desc">Lait, matcha de cérémonie, purée de fraise fraîche</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Matcha Coco</span><span class="menu-item-price">5,90 €</span></div>
-                            <span class="menu-item-desc">Eau de coco, crème de matcha coco</span>
+                            <span class="menu-item-desc">Eau de coco rafraîchissante, crème de matcha coco</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Ube Latte</span><span class="menu-item-price">5,00 €</span></div>
@@ -266,19 +351,19 @@
                     <ul>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Latte Caramel Beurre Salé</span><span class="menu-item-price">5,90 €</span></div>
-                            <span class="menu-item-desc">Café, lait, coulis caramel</span>
+                            <span class="menu-item-desc">Café de spécialité, lait, coulis caramel maison</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Pistachio Latte</span><span class="menu-item-price">5,90 €</span></div>
-                            <span class="menu-item-desc">Café, lait, crème de pistache, mousse de pistache</span>
+                            <span class="menu-item-desc">Café, lait, crème de pistache artisanale</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Chai Latte</span><span class="menu-item-price">5,50 €</span></div>
-                            <span class="menu-item-desc">Poudre chaï, lait, cannelle</span>
+                            <span class="menu-item-desc">Mélange d'épices chaï, lait, cannelle</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Cinnamon Roll Latte</span><span class="menu-item-price">6,10 €</span></div>
-                            <span class="menu-item-desc">Café, lait, cannelle, mousse de vanille</span>
+                            <span class="menu-item-desc">Café, lait, cannelle, mousse vanille</span>
                         </li>
                         <li>
                             <div class="menu-item-header"><span class="menu-item-name">Blueberry Ube Latte</span><span class="menu-item-price">6,10 €</span></div>
@@ -290,9 +375,12 @@
         </div>
     </section>
 
-    <section id="location" class="location-section">
-        <h2 class="section-title" style="margin-top: 0;">Nous <span>trouver</span></h2>
-        <p style="text-align: center; font-size: 1.2rem; color: var(--text-mid); font-weight: 500;">Village de Leucate, 11370 <br> Ouvert 7j/7 de 7h30 à 18h30</p>
+    <section id="location" style="padding: 6rem 10% 3rem; background: white;">
+        <div style="text-align: center;">
+            <div class="section-label" style="justify-content: center; margin-bottom: 0;">Nous trouver</div>
+            <h2 class="section-title" style="margin-top: 0;">Le Village de <span>Leucate</span></h2>
+            <p style="font-size: 1.25rem; color: var(--text-mid); font-weight: 500; line-height: 1.7;">Nous sommes nichés au cœur de Leucate village (11370), Pyrénées-Orientales. <br> Ouvert 7j/7 de 7h30 à 18h30 pour vos moments chill.</p>
+        </div>
         
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.4402107025912!2d3.0368153767242503!3d42.86355190314313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b05ef5714c480b%3A0x78f0b7e36f726026!2sQuai%20de%20l'Angle%2C%2011370%20Leucate!5e0!3m2!1sfr!2sfr!4v1776953480718!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -300,9 +388,9 @@
     </section>
 
     <footer>
-        <img src="1.png" alt="Mascotte Footer" style="height: 90px; margin-bottom: 1.5rem; filter: brightness(0) invert(1); opacity: 0.9;">
-        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem;">MON latte</p>
-        <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">© 2026 Marjorie & Clément - Saint-Cyprien / Leucate</p>
+        <img src="1.png" alt="Mascotte MON latte Footer" style="height: 110px; margin-bottom: 2rem; filter: grayscale(100%) invert(1); opacity: 0.9;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--gold-light);">MON latte</p>
+        <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem;">© 2026 Marjorie & Clément - Leucate. Tous droits réservés.</p>
     </footer>
 </body>
 </html>
