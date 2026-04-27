@@ -1,20 +1,16 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 
 const heroGallery = [
   {
-    src: "/images/hero-gallery/hero-terrasse.png",
+    src: "/images/hero-gallery/hero-terrasse.jpg",
     alt: "Terrasse MON latte baignée de lumière"
   },
   {
-    src: "/images/hero-gallery/hero-interieur-panorama.png",
+    src: "/images/hero-gallery/hero-interieur-panorama.jpg",
     alt: "Vue intérieure panoramique du coffee shop MON latte"
   },
   {
-    src: "/images/hero-gallery/hero-pergola.png",
+    src: "/images/hero-gallery/hero-pergola.jpg",
     alt: "Pergola et espace extérieur au Port de Leucate"
   },
   {
@@ -24,21 +20,9 @@ const heroGallery = [
 ] as const;
 
 export function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "11%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
-
   return (
-    <div
-      ref={ref}
-      className="mx-auto grid min-h-[calc(100dvh-6rem)] max-w-7xl items-start gap-7 pt-1 sm:gap-10 sm:pt-3 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-12 lg:pt-8"
-    >
-      <motion.div className="relative z-10 max-w-xl">
+    <div className="relative mx-auto grid min-h-[calc(100dvh-6rem)] max-w-7xl items-start gap-7 pt-1 sm:gap-10 sm:pt-3 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch lg:gap-12 lg:pt-8">
+      <div className="relative z-10 max-w-xl">
         <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase text-gold">
           <span className="h-px w-10 bg-gold" />
           Port de Leucate
@@ -65,14 +49,10 @@ export function Hero() {
             Notre vision
           </a>
         </div>
-
-      </motion.div>
+      </div>
 
       <div className="relative min-h-[42vh] sm:min-h-[54vh] lg:h-full lg:min-h-0">
-        <motion.figure
-          style={reduceMotion ? undefined : { y: imageY, scale: imageScale }}
-          className="absolute inset-0 overflow-hidden border border-white/55 bg-white/30 p-2 shadow-2xl shadow-green/10 sm:p-3"
-        >
+        <figure className="absolute inset-0 overflow-hidden border border-white/55 bg-white/30 p-2 shadow-2xl shadow-green/10 sm:p-3">
           <div className="grid h-full grid-cols-2 grid-rows-2 gap-2 sm:gap-3">
             {heroGallery.map((image, index) => (
               <div key={image.src} className="relative overflow-hidden bg-[#efe8de]">
@@ -80,7 +60,8 @@ export function Hero() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  priority={index < 2}
+                  priority={index === 0}
+                  quality={78}
                   sizes="(min-width: 1024px) 25vw, 50vw"
                   className="object-cover"
                 />
@@ -88,7 +69,7 @@ export function Hero() {
               </div>
             ))}
           </div>
-        </motion.figure>
+        </figure>
       </div>
     </div>
   );

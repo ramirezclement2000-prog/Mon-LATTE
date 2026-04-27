@@ -42,9 +42,10 @@ export function StorySection() {
         <figure className="relative overflow-hidden rounded-[2rem] border border-white/65 bg-white/40 p-2 shadow-2xl shadow-green/10 sm:rounded-[2.3rem]">
           <div className="relative aspect-[16/10] overflow-hidden rounded-[1.6rem] sm:aspect-[18/10] sm:rounded-[2rem]">
             <Image
-              src="/images/hero-gallery/hero-interieur-panorama.png"
+              src="/images/hero-gallery/hero-interieur-panorama.jpg"
               alt="Intérieur MON latte au Port de Leucate"
               fill
+              quality={78}
               sizes="(min-width: 1024px) 45vw, 92vw"
               className="object-cover"
             />
