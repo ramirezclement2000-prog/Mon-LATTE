@@ -79,9 +79,8 @@ export function EventSection() {
           </div>
 
           <form
-            action="mailto:contact@monlatte.fr?subject=Demande%20%C3%A9v%C3%A9nement%20MON%20latte"
+            action="/contact"
             method="post"
-            encType="text/plain"
             className="grid gap-3 sm:grid-cols-2"
           >
             <label className="grid gap-1.5">

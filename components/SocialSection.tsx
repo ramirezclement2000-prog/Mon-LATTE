@@ -63,7 +63,7 @@ export function SocialSection() {
               key={link.name}
               href={link.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="group border border-gold/16 bg-white/52 p-5 shadow-2xl shadow-green/5 transition hover:-translate-y-1 hover:border-gold/32 sm:p-6 md:min-h-[178px]"
             >
               <div className="flex items-start justify-between gap-5">

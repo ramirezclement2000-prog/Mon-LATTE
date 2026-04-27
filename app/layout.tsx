@@ -19,7 +19,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "MON latte | Coffee shop de spécialité à Leucate",
   description:
-    "MON latte, coffee shop de spécialité au Port de Leucate : latte art, recettes inclusives, matcha, ube et ambiance cosy premium."
+    "MON latte, coffee shop de spécialité au Port de Leucate : latte art, recettes inclusives, matcha, ube et ambiance cosy premium.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/images/mon-latte-logo.png"
+  }
 };
 
 export default function RootLayout({
