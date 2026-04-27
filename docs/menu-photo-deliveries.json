@@ -1,0 +1,242 @@
+[
+  {
+    "drinkName": "Espresso",
+    "artisticRationaleFr": "Vue 45° légèrement basse pour magnifier la crema et la densité du shot. La lumière latérale du matin donne un reflet appétissant sans effet plastique. Le décor reste premium bohème, sobre et précis.",
+    "promptEn": "Ultra-premium specialty coffee photography, single espresso shot in a handmade off-white ceramic demitasse on a matching saucer, rich tiger-striped crema in sharp focus, subtle steam, 45-degree low angle, bohemian coffee shop ambiance, warm honey-sand-olive color grading, natural morning side light from the left, appetizing specular highlights on crema and ceramic glaze, soft rattan-and-oak background bokeh, editorial food styling, realistic texture, 85mm lens look, shallow depth of field, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no latte art, no milk foam dome, no plastic CGI look, no harsh flash, no duplicate cups, no distorted geometry, no extra fingers",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: 45-degree low angle",
+      "Support: ceramic demitasse",
+      "Background: indoor boho bokeh (rattan/oak)"
+    ]
+  },
+  {
+    "drinkName": "Americano",
+    "artisticRationaleFr": "Top-down net et graphique pour montrer la surface profonde du café allongé. L’univers reste lumineux, avec une table minérale claire et des accessoires minimalistes. Le rendu respire la clarté et la longueur en bouche.",
+    "promptEn": "Top-down premium coffee photo of an Americano in a transparent heat-resistant glass cup, dark amber surface with subtle reflections, thin crema ring, placed on light travertine stone table, minimal stainless spoon and folded linen napkin, soft noon daylight from above-right, clean modern bohemian coffee shop styling, warm neutral palette with gentle contrast, editorial composition with negative space, ultra-realistic texture, crisp details, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no milk foam art, no clutter, no over-saturation, no plastic render, no duplicate drinks, no blur on main cup",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: top-down",
+      "Support: transparent glass cup",
+      "Background: light travertine surface"
+    ]
+  },
+  {
+    "drinkName": "Cappuccino",
+    "artisticRationaleFr": "Macro au ras de tasse pour rendre la mousse fine et la texture velours immédiatement lisibles. La lumière est douce et enveloppante pour un côté réconfortant. On obtient un visuel chaleureux et tactile.",
+    "promptEn": "Macro side-profile cappuccino photo, creamy microfoam with detailed latte art rosetta in a wide matte ceramic cappuccino cup, warm wooden table with soft linen runner, low-angle close-up framing, natural window light with soft shadow falloff, premium bohemian coffee shop feel, appetizing highlights on foam, realistic milk texture and ceramic grain, cinematic shallow DOF, editorial food photography, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no fake foam texture, no excessive blur, no harsh rim light, no duplicated cups, no CGI artifacts",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: low macro side-profile",
+      "Support: wide matte ceramic cup",
+      "Background: oak + linen texture"
+    ]
+  },
+  {
+    "drinkName": "Flat White",
+    "artisticRationaleFr": "Vue 45° haute, compacte et éditoriale pour refléter l’ADN australien du flat white. Le cadre est propre, minimal et orienté texture lait/café. La scène est plus urbaine et contemporaine.",
+    "promptEn": "45-degree high-angle flat white in a small tulip-shaped ceramic cup, tight silky microfoam and compact latte art center, placed on medium oak café table with folded newspaper edge in frame, soft afternoon daylight, premium contemporary-boho coffee shop style, restrained warm palette, realistic foam and crema merge, editorial composition, 50mm lens look, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no oversized mug, no heavy props, no glossy plastic look, no incorrect milk texture, no duplicate cups",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: 45-degree high angle",
+      "Support: small tulip ceramic cup",
+      "Background: oak table with subtle editorial prop"
+    ]
+  },
+  {
+    "drinkName": "Cold Brew",
+    "artisticRationaleFr": "Contre-plongée légère pour valoriser la transparence, la glace et la condensation. Le rendu doit paraître frais, net et premium, avec un contraste propre. On sent immédiatement une boisson froide et longue.",
+    "promptEn": "Premium cold brew photo in a tall double-wall glass filled with clear ice cubes and deep coffee tones, visible condensation droplets, low-angle perspective, brushed metal counter foreground, blurred espresso machine and plants in background, crisp natural side light with cool-warm balance, bohemian specialty coffee bar atmosphere, highly realistic drink texture, editorial food photo, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no milky appearance, no fake ice, no muddy colors, no plastic feel, no duplicate drinks, no distorted glass",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: low-angle beverage portrait",
+      "Support: tall double-wall glass",
+      "Background: brushed metal + bar bokeh"
+    ]
+  },
+  {
+    "drinkName": "Latte",
+    "artisticRationaleFr": "Profil latéral pour lire la micro-mousse et la rondeur de la tasse d’un seul regard. La scène reste douce et lumineuse, très “coffee ritual”. Le verre cannelé apporte une signature premium.",
+    "promptEn": "Side-profile latte in a ribbed clear glass, smooth creamy top and balanced espresso-milk tone, set on pale marble café table near window, warm natural daylight, subtle reflections on glass ribs, cozy bohemian coffee shop mood, realistic foam and crema transition, elegant editorial styling, shallow depth of field, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no harsh shadows, no overblown highlights, no fake foam, no duplicate glasses, no CGI look",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: side-profile",
+      "Support: ribbed glass",
+      "Background: pale marble near window"
+    ]
+  },
+  {
+    "drinkName": "Vanilla Latte (Vanillatte)",
+    "artisticRationaleFr": "Top-down poétique pour mettre en valeur le côté doux et aromatique de la vanille. On joue une palette crème/sable et des détails fins. Le rendu doit être délicat mais gourmand.",
+    "promptEn": "Top-down vanilla latte in an artisan ivory ceramic mug with delicate crema swirl, natural vanilla pod and tiny vanilla flower nearby, placed on beige linen cloth over light wood table, soft diffused daylight, premium bohemian coffee styling, warm creamy color grading, subtle appetizing highlights, clean editorial composition, ultra-realistic textures, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no synthetic colors, no clutter, no fake flowers, no plastic cup look, no duplicate drinks",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: top-down",
+      "Support: artisan ceramic mug",
+      "Background: beige linen + light wood"
+    ]
+  },
+  {
+    "drinkName": "Latte Macchiato",
+    "artisticRationaleFr": "Cadrage frontal pour montrer clairement les couches lait/espresso. La lumière arrière dessine les volumes et renforce la lisibilité. Le style reste net et contemporain.",
+    "promptEn": "Front-facing latte macchiato in a tall clear glass, distinct layered milk and espresso bands, clean vertical composition, backlit by warm late-afternoon window light, soft bohemian café interior blur, minimal styling on neutral stone tabletop, high realism, clear liquid separation, editorial food photography, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no muddy layers, no over-foamed top, no fake glass reflections, no duplicate cups, no CGI artifacts",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: straight-on frontal",
+      "Support: tall clear glass",
+      "Background: warm backlit café blur"
+    ]
+  },
+  {
+    "drinkName": "Moccaccino",
+    "artisticRationaleFr": "Vue 45° rapprochée pour souligner chocolat, mousse et profondeur café. Le contraste chaud doit évoquer une boisson dessert maîtrisée. L’atmosphère reste élégante et cosy.",
+    "promptEn": "45-degree close-up moccaccino in a dark ceramic cup, espresso and milk topped with silky foam and fine cocoa dust, small chocolate shard garnish, warm tungsten-accent natural light mix, rustic oak tabletop, premium bohemian coffee house mood, appetizing highlights and rich brown tones, editorial culinary photography, realistic texture detail, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no whipped-cream mountain, no fake chocolate, no heavy clutter, no plastic render, no duplicate cups",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: 45-degree close-up",
+      "Support: dark ceramic cup",
+      "Background: rustic oak with warm tungsten accents"
+    ]
+  },
+  {
+    "drinkName": "Moccaccino Blanc",
+    "artisticRationaleFr": "Top-down lumineux pour exprimer la douceur lactée du chocolat blanc. La scène est claire, minimaliste et raffinée. Les détails doivent rester fins et appétissants.",
+    "promptEn": "Top-down white mocha (moccaccino blanc) in a glossy off-white cup, creamy pale foam with subtle white chocolate curls, light stone table and ivory napkin, soft natural daylight, premium bohemian café aesthetic, warm cream-and-honey tones, clean editorial layout, hyper-realistic textures, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no dark chocolate color, no excessive props, no plastic highlights, no duplicate cups, no unnatural whites",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: top-down clean editorial",
+      "Support: glossy off-white cup",
+      "Background: light stone + ivory napkin"
+    ]
+  },
+  {
+    "drinkName": "Matcha Latte",
+    "artisticRationaleFr": "Profil élégant pour lire le vert du matcha et la texture fouettée. L’ambiance reste calme, saine et premium. On privilégie une lumière naturelle douce et des matières organiques.",
+    "promptEn": "Side-profile matcha latte in a transparent glass cup, vivid ceremonial matcha green with silky milk body, fine microbubbles on top, bamboo-texture tray and soft neutral backdrop, natural diffused morning light, premium bohemian coffee shop styling, appetizing clean highlights, realistic matcha tone without neon, editorial food photo, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no neon green, no artificial color cast, no clutter, no duplicate glasses, no CGI/plastic look",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: side-profile",
+      "Support: transparent glass cup",
+      "Background: bamboo-texture tray"
+    ]
+  },
+  {
+    "drinkName": "Matcha Vanilla",
+    "artisticRationaleFr": "Vue 45° aérienne pour équilibrer fraîcheur végétale et douceur vanillée. Les éléments de set restent subtils et élégants. Le résultat doit évoquer un rituel doux et moderne.",
+    "promptEn": "45-degree high-angle matcha vanilla latte in a clear tumbler, layered soft green matcha and creamy vanilla milk, subtle vanilla bean detail on side plate, warm natural window light, beige plaster wall bokeh, premium bohemian café atmosphere, refined editorial food styling, realistic texture and color separation, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no overly saturated green, no synthetic vanilla props, no duplicate cups, no hard flash, no plastic render",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: 45-degree high angle",
+      "Support: clear tumbler",
+      "Background: beige plaster bokeh"
+    ]
+  },
+  {
+    "drinkName": "Matcha Fraise",
+    "artisticRationaleFr": "Top-down color block pour rendre lisible l’alliance rose/vert en une seconde. Le cadrage met en avant la fraîcheur fruitée et l’aspect signature. L’image doit être vibrante sans excès.",
+    "promptEn": "Top-down premium matcha strawberry latte in ribbed glass, clear pink strawberry layer and vibrant matcha green top, fresh strawberry slice garnish, light wooden tray on creamy linen background, natural daylight, bohemian coffee shop editorial styling, appetizing highlights, realistic fresh fruit texture, balanced contrast, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no neon colors, no artificial syrup look, no clutter, no duplicate glasses, no CGI artifacts",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: top-down color-focused",
+      "Support: ribbed glass",
+      "Background: wood tray + creamy linen"
+    ]
+  },
+  {
+    "drinkName": "Matcha Coco",
+    "artisticRationaleFr": "Contre-plongée douce pour accentuer la mousse coco et la transparence du verre. La scène doit sembler fraîche, légère et solaire. Le tout reste premium et naturel.",
+    "promptEn": "Low-angle matcha coconut drink in a tall clear glass, coconut foam crown over matcha cream, subtle coconut flakes and tiny coconut piece on side, terrazzo tabletop, bright but soft coastal daylight, premium bohemian coffee bar vibe, clean appetizing highlights, realistic creamy texture, editorial beverage photography, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no fake tropical props, no neon green, no plastic foam, no duplicate drinks, no overprocessed look",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: low-angle fresh portrait",
+      "Support: tall clear glass",
+      "Background: terrazzo surface, coastal light"
+    ]
+  },
+  {
+    "drinkName": "Ube Latte",
+    "artisticRationaleFr": "Profil frontal serré pour sublimer la teinte violette et la texture satinée. La lumière est douce pour conserver une couleur naturelle, non artificielle. L’image doit paraître iconique et signature.",
+    "promptEn": "Front-close premium ube latte in a clear ribbed glass, natural violet-purple gradient with silky milk body, subtle ice shine, soft neutral background with warm wooden hint, diffuse daylight, premium bohemian coffee shop editorial mood, realistic pigment tones, appetizing clean reflections, high detail, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no neon purple, no cartoon look, no duplicate glasses, no harsh shadows, no CGI plastic texture",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: front-close portrait",
+      "Support: clear ribbed glass",
+      "Background: neutral soft backdrop + warm wood hint"
+    ]
+  },
+  {
+    "drinkName": "Chaï Latte",
+    "artisticRationaleFr": "Macro latéral pour rendre les épices visibles et sensorielles. Le traitement chaud et légèrement ambré renforce l’effet réconfort. L’ensemble reste chic, pas rustique excessif.",
+    "promptEn": "Macro side-view chai latte in a rustic ceramic mug, creamy spiced foam with cinnamon dust, star anise and cardamom pods subtly styled nearby, warm amber-toned natural light, textured walnut table, premium bohemian café atmosphere, rich but clean color grading, realistic spice and foam detail, editorial gastronomic shot, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no excessive props, no fake spice look, no over-saturation, no duplicate mugs, no CGI artifacts",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: macro side-view",
+      "Support: rustic ceramic mug",
+      "Background: textured walnut with spice accents"
+    ]
+  },
+  {
+    "drinkName": "Latte Caramel Beurre Salé",
+    "artisticRationaleFr": "Vue 45° gourmande pour mettre le caramel en valeur dans le verre. La brillance contrôlée crée l’appétence immédiatement. Le cadre reste minimal pour laisser la boisson dominer.",
+    "promptEn": "45-degree premium caramel latte in a ribbed glass, visible salted caramel drizzle inside glass walls, creamy top with subtle cinnamon dust, served on warm wood tray, soft side daylight, bohemian upscale coffee shop mood, appetizing glossy highlights on caramel, realistic milk-coffee blend, elegant editorial composition, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no sticky messy spills, no fake caramel texture, no duplicate glasses, no plastic render, no harsh flash",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: 45-degree gourmand close shot",
+      "Support: ribbed glass",
+      "Background: warm tray setup"
+    ]
+  },
+  {
+    "drinkName": "Pistachio Latte",
+    "artisticRationaleFr": "Top-down élégant pour montrer la crème pistache et la finition verte. La scène doit être premium, végétale et pâtissière à la fois. Le cadrage reste net et sophistiqué.",
+    "promptEn": "Top-down pistachio latte in a handcrafted ceramic cup on muted green saucer, creamy foam with crushed pistachio sprinkle, subtle pistachio cream swirl, soft linen and light stone background, natural daylight, premium bohemian café styling, appetizing highlights, realistic nut texture, editorial food composition, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no neon green paste, no clutter, no duplicate cups, no fake nuts, no plastic sheen",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: top-down",
+      "Support: ceramic cup + green saucer",
+      "Background: linen + light stone"
+    ]
+  },
+  {
+    "drinkName": "Cinnamon Roll Latte",
+    "artisticRationaleFr": "Profil latéral narratif avec un cinnamon roll flou au second plan pour relier boisson et univers dessert. Lumière chaude et douce pour un rendu cocon. La boisson reste le sujet principal.",
+    "promptEn": "Side-profile cinnamon roll latte in a clear glass, warm coffee-milk tone with cinnamon dust on foam, blurred cinnamon roll pastry in background, cozy bohemian café table setting, golden late-afternoon natural light, appetizing specular highlights, realistic texture and depth, premium editorial beverage photography, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no oversized pastry in focus, no fake cinnamon texture, no duplicate drinks, no CGI look, no harsh contrast",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: side-profile narrative",
+      "Support: clear glass",
+      "Background: pastry bokeh storytelling"
+    ]
+  },
+  {
+    "drinkName": "Blueberry Ube Latte",
+    "artisticRationaleFr": "Cadrage frontal pour bien lire les couches bleu-violet et l’identité signature. Le contraste coloré est vivant mais maîtrisé. Le rendu doit être premium, frais et immédiatement identifiable.",
+    "promptEn": "Front-facing premium blueberry ube latte in a tall clear glass, layered blueberry and ube tones (indigo-violet) with creamy milk transitions, tiny blueberry garnish on rim, cool-warm balanced lighting, minimalist bohemian coffee bar background blur, realistic natural pigments, appetizing highlights and clean contrast, editorial beverage photo, vertical 4:5",
+    "negativePromptEn": "no faces, no logos, no text, no watermark, no neon purple-blue, no artificial syrup mess, no duplicate glasses, no plastic CGI feel, no distorted layering",
+    "imageSpec": "4:5 portrait",
+    "uniquenessNotes": [
+      "Angle: straight-on layered view",
+      "Support: tall clear glass",
+      "Background: minimalist coffee bar blur"
+    ]
+  }
+]

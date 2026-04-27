@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MON latté - Coffee Shop de spécialité</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #496d45;
+            --gold: #bf9665;
+            --cream: #faf7f2;
+            --cream-dark: #f2ede4;
+            --text: #1a1a18;
+            --text-soft: rgba(26, 26, 24, 0.7);
+            --nav-height: 104px;
+            --shadow-up: 0 -15px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(191, 150, 101, 0.08), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(73, 109, 69, 0.08), transparent 22%),
+                linear-gradient(180deg, #fcfaf6 0%, var(--cream) 100%);
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+            background: none;
+            border: 0;
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        section[id] {
+            scroll-margin-top: calc(var(--nav-height) + 18px);
+        }
+
+        body.menu-open {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            overflow: hidden;
+            overscroll-behavior: none;
+        }
+
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: var(--nav-height);
+            padding: 1rem clamp(1.2rem, 3vw, 3rem);
+            background: rgba(250, 247, 242, 0.9);
+            border-bottom: 1px solid rgba(191, 150, 101, 0.22);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav-logo {
+            position: relative;
+            z-index: 202;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        .nav-logo img {
+            width: 92px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: clamp(1rem, 2.6vw, 2.4rem);
+            list-style: none;
+        }
+
+        .nav-links li {
+            flex: 0 0 auto;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 0.2rem 0;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(1.1rem, 1.5vw, 1.55rem);
+            font-style: italic;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+            transform: translateY(-1px);
+        }
+
+        .nav-toggle {
+            position: relative;
+            z-index: 212;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: 1px solid rgba(191, 150, 101, 0.22);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 12px 28px rgba(26, 26, 24, 0.08);
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-toggle:hover {
+            border-color: rgba(73, 109, 69, 0.28);
+            transform: translateY(-1px);
+        }
+
+        .nav-toggle:focus-visible,
+        .nav-links a:focus-visible,
+        .cta:focus-visible {
+            outline: 2px solid rgba(73, 109, 69, 0.5);
+            outline-offset: 3px;
+        }
+
+        .nav-toggle-box {
+            position: relative;
+            width: 20px;
+            height: 14px;
+        }
+
+        .nav-toggle-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            border-radius: 999px;
+            background: var(--text);
+            transition: transform 0.28s ease, opacity 0.22s ease, top 0.28s ease;
+        }
+
+        .nav-toggle-line:nth-child(1) {
+            top: 0;
+        }
+
+        .nav-toggle-line:nth-child(2) {
+            top: 6px;
+        }
+
+        .nav-toggle-line:nth-child(3) {
+            top: 12px;
+        }
+
+        body.menu-open .nav-toggle-line:nth-child(1) {
+            top: 6px;
+            transform: rotate(45deg);
+        }
+
+        body.menu-open .nav-toggle-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        body.menu-open .nav-toggle-line:nth-child(3) {
+            top: 6px;
+            transform: rotate(-45deg);
+        }
+
+        .nav-backdrop {
+            display: none;
+        }
+
+        .stack-scene {
+            position: relative;
+            padding-bottom: 0;
+        }
+
+        .stack-card {
+            position: relative;
+            min-height: auto;
+            padding: calc(var(--nav-height) + 2rem) clamp(1.4rem, 5vw, 5.8rem) clamp(4.5rem, 6vw, 5.2rem);
+            overflow: visible;
+        }
+
+        .stack-card + .stack-card {
+            margin-top: 0;
+            border-radius: 40px 40px 0 0;
+            box-shadow: var(--shadow-up);
+        }
+
+        .card-hero {
+            z-index: 1;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(180deg, rgba(250, 247, 242, 0.88), rgba(250, 247, 242, 0.96)),
+                linear-gradient(120deg, rgba(191, 150, 101, 0.14), transparent 34%);
+        }
+
+        .card-about {
+            z-index: 2;
+            background: var(--cream-dark);
+        }
+
+        .card-menu {
+            z-index: 3;
+            background: var(--cream);
+        }
+
+        .card-location {
+            z-index: 4;
+            background: #ffffff;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 42px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .hero-layout,
+        .about-layout,
+        .location-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+            gap: clamp(2rem, 5vw, 5.5rem);
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-copy,
+        .about-copy,
+        .location-copy {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand-mark {
+            margin-bottom: 0.55rem;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 0.92;
+            letter-spacing: -0.03em;
+            color: var(--text);
+        }
+
+        .brand-mark span {
+            color: var(--green);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .hero-title,
+        .about-title,
+        .location-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(3.3rem, 7vw, 6.6rem);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-title span,
+        .about-title span,
+        .location-title span {
+            color: var(--green);
+            font-style: italic;
+        }
+
+        .hero-text,
+        .about-text,
+        .location-text {
+            max-width: 34rem;
+            margin-top: 1.3rem;
+            font-size: clamp(1rem, 1.45vw, 1.16rem);
+            line-height: 1.75;
+            color: var(--text-soft);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 164px;
+            min-height: 48px;
+            padding: 0.95rem 1.4rem;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .cta-primary {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .cta-secondary {
+            border: 1px solid rgba(26, 26, 24, 0.18);
+            color: var(--text);
+        }
+
+        .cta:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: min(68vh, 720px);
+        }
+
+        .hero-main-image,
+        .hero-accent-image,
+        .about-photo-main,
+        .about-photo-detail {
+            position: absolute;
+            overflow: hidden;
+            box-shadow: 0 22px 54px rgba(53, 39, 24, 0.12);
+            pointer-events: none;
+        }
+
+        .hero-main-image {
+            inset: 0 0 8% 16%;
+            border-radius: 52% 48% 44% 56% / 43% 42% 58% 57%;
+        }
+
+        .hero-accent-image {
+            left: 0;
+            bottom: 2%;
+            width: min(38%, 230px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            border: 10px solid rgba(250, 247, 242, 0.92);
+        }
+
+        .hero-visual img,
+        .about-photo-main img,
+        .about-photo-detail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-layout {
+            grid-template-columns: minmax(320px, 1fr) minmax(0, 0.9fr);
+        }
+
+        .about-visual {
+            position: relative;
+            min-height: min(66vh, 680px);
+        }
+
+        .about-photo-main {
+            inset: 6% 10% 0 0;
+            border-radius: 50%;
+        }
+
+        .about-photo-detail {
+            right: 0;
+            bottom: 0;
+            width: min(42%, 250px);
+            aspect-ratio: 0.82;
+            border-radius: 44% 56% 50% 50% / 38% 43% 57% 62%;
+            border: 10px solid rgba(242, 237, 228, 0.94);
+        }
+
+        .about-note {
+            margin-top: 1.6rem;
+            max-width: 22rem;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: rgba(26, 26, 24, 0.56);
+            font-style: italic;
+        }
+
+        .menu-frame {
+            max-width: 1460px;
+            margin: 0 auto;
+        }
+
+        .menu-heading {
+            max-width: 720px;
+            margin: 0 auto 2.8rem;
+            text-align: center;
+        }
+
+        .menu-heading h2 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(3.4rem, 8vw, 6.3rem);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+        }
+
+        .menu-heading h2 span {
+            color: var(--green);
+            font-style: italic;
+        }
+
+        .menu-heading p {
+            margin-top: 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(26, 26, 24, 0.54);
+        }
+
+        .menu-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 5.5rem;
+            margin-top: 4rem;
+        }
+
+        .menu-group {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .menu-group-head {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .menu-group-index {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.2rem;
+            line-height: 1;
+            color: var(--gold);
+            letter-spacing: 0.18em;
+        }
+
+        .menu-group h3 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(2.6rem, 4.6vw, 4.8rem);
+            line-height: 0.92;
+            letter-spacing: -0.04em;
+        }
+
+        .menu-group h3 span {
+            color: var(--green);
+            font-style: italic;
+        }
+
+        .menu-entries {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(3.2rem, 7vw, 5.4rem);
+        }
+
+        .editorial-entry {
+            display: grid;
+            grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+            gap: clamp(1.4rem, 4vw, 4rem);
+            align-items: center;
+            max-width: 1100px;
+        }
+
+        .editorial-entry.entry-right {
+            grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+            margin-left: auto;
+        }
+
+        .editorial-entry.entry-right .entry-media {
+            order: 2;
+        }
+
+        .editorial-entry.entry-right .entry-copy {
+            order: 1;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .editorial-entry.entry-center {
+            grid-template-columns: 1fr;
+            justify-items: center;
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .editorial-entry.entry-center .entry-copy {
+            max-width: 38rem;
+            text-align: center;
+        }
+
+        .entry-media {
+            width: min(28vw, 360px);
+            aspect-ratio: 1 / 1;
+            padding: clamp(0.8rem, 1.8vw, 1.2rem);
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.08) 58%),
+                radial-gradient(circle at 70% 75%, rgba(191, 150, 101, 0.12), transparent 55%);
+            transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .shape-circle {
+            border-radius: 50%;
+        }
+
+        .shape-organic-a {
+            border-radius: 56% 44% 52% 48% / 39% 51% 49% 61%;
+        }
+
+        .shape-organic-b {
+            border-radius: 43% 57% 45% 55% / 56% 40% 60% 44%;
+        }
+
+        .shape-organic-c {
+            border-radius: 58% 42% 38% 62% / 44% 57% 43% 56%;
+        }
+
+        .entry-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            transition: transform 1.2s ease;
+        }
+
+        .entry-copy {
+            max-width: 34rem;
+        }
+
+        .entry-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.76rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(26, 26, 24, 0.46);
+        }
+
+        .entry-label::before {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background: rgba(26, 26, 24, 0.26);
+        }
+
+        .entry-topline {
+            display: flex;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.4rem;
+            margin-top: 0.7rem;
+        }
+
+        .entry-right .entry-topline {
+            justify-content: flex-end;
+        }
+
+        .entry-center .entry-topline {
+            justify-content: center;
+        }
+
+        .entry-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(2.8rem, 5vw, 4.9rem);
+            line-height: 0.9;
+            letter-spacing: -0.045em;
+            transition: color 0.35s ease;
+        }
+
+        .entry-price {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(1.8rem, 2.7vw, 2.6rem);
+            line-height: 1;
+            color: var(--gold);
+        }
+
+        .entry-note {
+            margin-top: 0.8rem;
+            font-size: 0.97rem;
+            line-height: 1.7;
+            color: rgba(26, 26, 24, 0.56);
+            font-style: italic;
+        }
+
+        .entry-description {
+            margin-top: 0.7rem;
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: var(--text-soft);
+        }
+
+        .entry-benefit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: 1rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--green);
+        }
+
+        .entry-benefit::before {
+            content: "";
+            width: 22px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .editorial-entry:hover .entry-media img,
+        .editorial-entry:focus-within .entry-media img {
+            transform: scale(1.05);
+        }
+
+        .editorial-entry:hover .entry-title,
+        .editorial-entry:focus-within .entry-title {
+            color: var(--green);
+        }
+
+        .editorial-entry[data-reveal] .entry-media,
+        .editorial-entry[data-reveal] .entry-label,
+        .editorial-entry[data-reveal] .entry-topline,
+        .editorial-entry[data-reveal] .entry-note,
+        .editorial-entry[data-reveal] .entry-description,
+        .editorial-entry[data-reveal] .entry-benefit {
+            opacity: 0;
+            transform: translateY(36px);
+        }
+
+        .editorial-entry.is-visible .entry-media {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.82s ease, transform 0.82s ease;
+        }
+
+        .editorial-entry.is-visible .entry-label {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.82s ease 0.08s, transform 0.82s ease 0.08s;
+        }
+
+        .editorial-entry.is-visible .entry-topline {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.82s ease 0.16s, transform 0.82s ease 0.16s;
+        }
+
+        .editorial-entry.is-visible .entry-note {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.82s ease 0.24s, transform 0.82s ease 0.24s;
+        }
+
+        .editorial-entry.is-visible .entry-description {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.82s ease 0.32s, transform 0.82s ease 0.32s;
+        }
+
+        .editorial-entry.is-visible .entry-benefit {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.82s ease 0.4s, transform 0.82s ease 0.4s;
+        }
+
+        .location-layout {
+            grid-template-columns: minmax(0, 0.82fr) minmax(340px, 1.18fr);
+        }
+
+        .location-copy {
+            max-width: 32rem;
+        }
+
+        .location-meta {
+            display: grid;
+            gap: 1.1rem;
+            margin-top: 1.8rem;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text-soft);
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.55rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(73, 109, 69, 0.22);
+            color: var(--green);
+            background: rgba(73, 109, 69, 0.08);
+            font-size: 0.86rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .location-map {
+            position: relative;
+            min-height: min(58vh, 620px);
+            border-radius: 34px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+            z-index: 1;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        footer {
+            padding: 2rem 1.5rem 3.2rem;
+            text-align: center;
+            color: rgba(26, 26, 24, 0.56);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 1180px) {
+            .entry-media {
+                width: min(32vw, 320px);
+            }
+
+            .editorial-entry,
+            .editorial-entry.entry-right {
+                max-width: 1000px;
+            }
+        }
+
+        @media (max-width: 920px) {
+            .menu-groups {
+                gap: 4rem;
+            }
+
+            .menu-group {
+                gap: 2.4rem;
+            }
+
+            .editorial-entry,
+            .editorial-entry.entry-right,
+            .editorial-entry.entry-center {
+                grid-template-columns: 1fr;
+                justify-items: start;
+                max-width: 100%;
+                margin: 0;
+                text-align: left;
+            }
+
+            .editorial-entry.entry-right .entry-media,
+            .editorial-entry.entry-right .entry-copy {
+                order: initial;
+            }
+
+            .editorial-entry.entry-right .entry-copy,
+            .editorial-entry.entry-center .entry-copy {
+                margin-left: 0;
+                max-width: 100%;
+                text-align: left;
+            }
+
+            .entry-right .entry-topline,
+            .entry-center .entry-topline {
+                justify-content: flex-start;
+            }
+
+            .entry-media {
+                width: min(72vw, 320px);
+            }
+        }
+
+        @media (max-width: 1180px) {
+            .menu-canvas {
+                grid-template-rows: repeat(14, minmax(26px, 4.8vw));
+            }
+
+            .menu-item:nth-child(1) { grid-column: 1 / span 5; grid-row: 1 / span 4; }
+            .menu-item:nth-child(2) { grid-column: 7 / span 5; grid-row: 1 / span 4; }
+            .menu-item:nth-child(3) { grid-column: 3 / span 4; grid-row: 5 / span 4; }
+            .menu-item:nth-child(4) { grid-column: 9 / span 4; grid-row: 5 / span 4; }
+            .menu-item:nth-child(5) { grid-column: 1 / span 5; grid-row: 9 / span 4; }
+            .menu-item:nth-child(6) { grid-column: 7 / span 5; grid-row: 9 / span 4; }
+            .menu-item:nth-child(7) { grid-column: 4 / span 6; grid-row: 12 / span 3; }
+
+            .menu-media {
+                width: min(28vw, 300px);
+            }
+        }
+
+        @media (max-width: 920px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            .hero-layout,
+            .about-layout,
+            .location-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy,
+            .about-copy,
+            .location-copy {
+                max-width: 42rem;
+            }
+
+            .hero-visual,
+            .about-visual {
+                min-height: 52vh;
+            }
+
+            .menu-canvas {
+                display: flex;
+                flex-direction: column;
+                gap: 3.5rem;
+            }
+
+            .menu-item,
+            .menu-item.align-right,
+            .menu-item.align-center {
+                text-align: left;
+            }
+
+            .menu-item.align-left .menu-copy,
+            .menu-item.align-right .menu-copy,
+            .menu-item.align-center .menu-copy {
+                max-width: 100%;
+                margin: -2.4rem 0 0;
+            }
+
+            .menu-item.align-right .menu-meta,
+            .menu-item.align-center .menu-meta {
+                justify-content: space-between;
+            }
+
+            .menu-item.align-right .menu-note,
+            .menu-item.align-right .menu-description {
+                margin-left: 0;
+            }
+
+            .menu-item.align-center .menu-media {
+                margin: 0;
+            }
+
+            .menu-media {
+                width: min(68vw, 320px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --nav-height: 88px;
+            }
+
+            body {
+                overflow-x: clip;
+            }
+
+            nav {
+                padding: calc(0.75rem + env(safe-area-inset-top)) 1rem 0.75rem;
+                gap: 0.8rem;
+                align-items: center;
+            }
+
+            .nav-logo img {
+                width: 74px;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+                flex: 0 0 auto;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: calc(var(--nav-height) + env(safe-area-inset-top) + 0.35rem);
+                right: 0.9rem;
+                bottom: calc(0.9rem + env(safe-area-inset-bottom));
+                left: 0.9rem;
+                z-index: 210;
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-start;
+                gap: 0.7rem;
+                min-height: calc(100dvh - var(--nav-height) - env(safe-area-inset-top) - 1.25rem);
+                padding: 1rem 1rem calc(1.15rem + env(safe-area-inset-bottom));
+                border: 1px solid rgba(191, 150, 101, 0.18);
+                border-radius: 32px;
+                background:
+                    linear-gradient(180deg, rgba(250, 247, 242, 0.985), rgba(250, 247, 242, 0.95)),
+                    radial-gradient(circle at top right, rgba(191, 150, 101, 0.12), transparent 28%);
+                backdrop-filter: blur(20px);
+                box-shadow: 0 28px 60px rgba(26, 26, 24, 0.12);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transform: translateY(-12px);
+                transition:
+                    opacity 0.28s ease,
+                    transform 0.32s ease,
+                    visibility 0s linear 0.32s;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            body.menu-open .nav-links {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: translateY(0);
+                transition:
+                    opacity 0.28s ease,
+                    transform 0.32s ease;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                width: 100%;
+                min-height: 54px;
+                justify-content: space-between;
+                padding: 0.95rem 1rem;
+                border-radius: 22px;
+                border: 1px solid rgba(191, 150, 101, 0.16);
+                background: rgba(255, 255, 255, 0.64);
+                box-shadow: 0 16px 36px rgba(26, 26, 24, 0.05);
+                font-size: clamp(1.35rem, 7vw, 2rem);
+                transform: none;
+            }
+
+            .nav-backdrop {
+                display: block;
+                position: fixed;
+                inset: 0;
+                z-index: 205;
+                background: rgba(26, 26, 24, 0.2);
+                backdrop-filter: blur(7px);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+            }
+
+            body.menu-open .nav-backdrop {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transition: opacity 0.28s ease;
+            }
+
+            .stack-card {
+                position: relative;
+                top: auto;
+                min-height: auto;
+                padding:
+                    calc(var(--nav-height) + 1.25rem + env(safe-area-inset-top))
+                    5vw
+                    calc(3rem + env(safe-area-inset-bottom));
+                transform: none !important;
+            }
+
+            .stack-card + .stack-card {
+                margin-top: 0;
+                border-radius: 26px 26px 0 0;
+            }
+
+            .card-hero {
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+
+            .hero-title,
+            .about-title,
+            .location-title {
+                font-size: clamp(2.8rem, 14vw, 4.2rem);
+            }
+
+            .menu-heading h2 {
+                font-size: clamp(2.8rem, 15vw, 4rem);
+            }
+
+            .entry-title {
+                font-size: clamp(2.2rem, 12vw, 3.5rem);
+            }
+
+            .hero-visual,
+            .about-visual {
+                min-height: auto;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 0.44fr);
+                gap: 0.9rem;
+                align-items: end;
+            }
+
+            .location-map {
+                min-height: clamp(320px, 50dvh, 460px);
+            }
+
+            .hero-main-image {
+                position: relative;
+                inset: auto;
+                width: 100%;
+                aspect-ratio: 0.88;
+                border-radius: 32px;
+            }
+
+            .hero-accent-image {
+                position: relative;
+                left: auto;
+                bottom: auto;
+                width: 100%;
+                aspect-ratio: 0.76;
+                border-width: 6px;
+                align-self: end;
+            }
+
+            .about-photo-main {
+                position: relative;
+                inset: auto;
+                width: 100%;
+                aspect-ratio: 0.88;
+                border-radius: 32px;
+            }
+
+            .about-photo-detail {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                width: 100%;
+                aspect-ratio: 0.78;
+                border-width: 6px;
+                align-self: end;
+            }
+
+            .entry-media {
+                width: min(100%, 280px);
+            }
+
+            .entry-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .entry-topline {
+                flex-wrap: wrap;
+                gap: 0.4rem 0.8rem;
+            }
+
+            .hero-layout,
+            .about-layout,
+            .location-layout {
+                gap: 1.55rem;
+            }
+
+            .hero-copy,
+            .about-copy,
+            .location-copy,
+            .entry-copy,
+            .hero-text,
+            .about-text,
+            .location-text {
+                max-width: none;
+            }
+
+            .hero-text,
+            .about-text,
+            .location-text,
+            .entry-description,
+            .entry-note {
+                font-size: clamp(0.98rem, 4vw, 1.05rem);
+                line-height: 1.66;
+            }
+
+            .menu-heading {
+                margin-bottom: 2rem;
+            }
+
+            .menu-heading p {
+                font-size: 0.84rem;
+                line-height: 1.5;
+                letter-spacing: 0.06em;
+            }
+
+            .menu-groups {
+                gap: 3.5rem;
+                margin-top: 2.8rem;
+            }
+
+            .menu-group {
+                gap: 1.9rem;
+            }
+
+            .menu-group h3 {
+                font-size: clamp(2.2rem, 10vw, 3.4rem);
+            }
+
+            .menu-entries {
+                gap: 2.3rem;
+            }
+
+            .editorial-entry,
+            .editorial-entry.entry-right,
+            .editorial-entry.entry-center {
+                gap: 1rem;
+            }
+
+            .menu-group-signatures .menu-entries {
+                display: grid;
+                grid-auto-flow: column;
+                grid-auto-columns: minmax(82vw, 1fr);
+                gap: 1rem;
+                overflow-x: auto;
+                padding: 0 0.2rem 0.7rem;
+                scroll-snap-type: x mandatory;
+                scroll-padding-inline: 0.2rem;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-x: contain;
+                scrollbar-width: none;
+            }
+
+            .menu-group-signatures .menu-entries::-webkit-scrollbar {
+                display: none;
+            }
+
+            .menu-group-signatures .editorial-entry,
+            .menu-group-signatures .editorial-entry.entry-right,
+            .menu-group-signatures .editorial-entry.entry-center {
+                width: 100%;
+                min-width: 0;
+                margin: 0;
+                padding: 1rem;
+                border: 1px solid rgba(191, 150, 101, 0.16);
+                border-radius: 28px;
+                background: rgba(255, 255, 255, 0.58);
+                box-shadow: 0 18px 34px rgba(26, 26, 24, 0.06);
+                scroll-snap-align: start;
+            }
+
+            .menu-group-signatures .entry-media {
+                width: min(64vw, 250px);
+            }
+
+            .editorial-entry[data-reveal] .entry-media,
+            .editorial-entry[data-reveal] .entry-label,
+            .editorial-entry[data-reveal] .entry-topline,
+            .editorial-entry[data-reveal] .entry-note,
+            .editorial-entry[data-reveal] .entry-description,
+            .editorial-entry[data-reveal] .entry-benefit {
+                transform: translateY(18px);
+            }
+
+            .location-layout {
+                gap: 1.6rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            nav {
+                padding: 0.8rem 0.9rem;
+            }
+
+            .nav-links {
+                padding-inline: 0.95rem;
+            }
+
+            .nav-links a {
+                font-size: clamp(1.25rem, 8vw, 1.7rem);
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta {
+                width: 100%;
+            }
+
+            .hero-visual,
+            .about-visual {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-accent-image,
+            .about-photo-detail {
+                max-width: 56%;
+                justify-self: end;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 768px) {
+            .menu-group-signatures .menu-entries {
+                grid-auto-columns: minmax(72vw, 1fr);
+            }
+
+            .menu-group-signatures .editorial-entry,
+            .menu-group-signatures .editorial-entry.entry-right,
+            .menu-group-signatures .editorial-entry.entry-center {
+                grid-template-columns: minmax(220px, 250px) minmax(0, 1fr);
+                align-items: center;
+            }
+
+            .menu-group-signatures .entry-media {
+                width: min(100%, 240px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .stack-card,
+            .entry-media,
+            .entry-media img,
+            .entry-title,
+            .nav-links a,
+            .cta,
+            .hero-main-image,
+            .about-photo-main,
+            .about-photo-detail {
+                transition: none !important;
+                animation: none !important;
+                transform: none !important;
+            }
+
+            .editorial-entry[data-reveal] .entry-media,
+            .editorial-entry[data-reveal] .entry-label,
+            .editorial-entry[data-reveal] .entry-topline,
+            .editorial-entry[data-reveal] .entry-note,
+            .editorial-entry[data-reveal] .entry-description,
+            .editorial-entry[data-reveal] .entry-benefit {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="nav-logo" href="#hero">
+            <img src="1.png" alt="Logo MON latté">
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Ouvrir le menu">
+            <span class="nav-toggle-box" aria-hidden="true">
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+            </span>
+        </button>
+        <ul class="nav-links" id="mobile-nav" aria-label="Navigation principale">
+            <li><a href="#hero">Accueil</a></li>
+            <li><a href="#about">Vision</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#location">Port</a></li>
+        </ul>
+        <button class="nav-backdrop" type="button" aria-hidden="true" tabindex="-1"></button>
+    </nav>
+
+    <main class="stack-scene">
+        <section id="hero" class="stack-card card-hero" data-stack-card>
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <div class="eyebrow">Port de Leucate</div>
+                    <div class="brand-mark">MON <span>latté</span></div>
+                    <h1 class="hero-title">L'art du café à la <span>française</span></h1>
+                    <p class="hero-text">Coffee shop de spécialité au bord de l'eau, matcha vibrant, lattés signatures et douceur solaire dans un décor chic, calme et ultra photogénique.</p>
+                    <div class="hero-actions">
+                        <a class="cta cta-primary" href="#menu">Découvrir la carte</a>
+                        <a class="cta cta-secondary" href="#location">Nous trouver</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <figure class="hero-main-image">
+                        <img src="F476DB8E-03F7-45B4-91B1-C2C987DA9DC6.PNG" alt="Intérieur de MON latté">
+                    </figure>
+                    <figure class="hero-accent-image">
+                        <img src="B7F518E6-ABDB-497C-852A-D5039D533D1F.PNG" alt="Coin salon de MON latté" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="stack-card card-about" data-stack-card>
+            <div class="about-layout">
+                <div class="about-copy">
+                    <div class="eyebrow">Notre vision</div>
+                    <h2 class="about-title">Un coffee shop <span>éditorial</span> posé au port</h2>
+                    <p class="about-text">MON latté marie l'esthétique des coffee shops australiens, la gourmandise généreuse des boissons signatures et la douceur iodée du Port de Leucate. Chaque tasse est pensée comme une image : précise, lumineuse, désirable.</p>
+                    <p class="about-note">Sans gluten, sans lactose, matcha de cérémonie, ube velouté, textures impeccables et service chaleureux : l'adresse a été conçue comme un refuge graphique autant qu'un vrai lieu de vie.</p>
+                </div>
+
+                <div class="about-visual">
+                    <figure class="about-photo-main">
+                        <img src="pexels-rodrigo-ortega-2044210904-29488014.jpg" alt="Café de spécialité en préparation" loading="lazy" decoding="async">
+                    </figure>
+                    <figure class="about-photo-detail">
+                        <img src="pexels-jack-atkinson-1289771108-24613535.jpg" alt="Latte art en gros plan" loading="lazy" decoding="async">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="stack-card card-menu" data-stack-card>
+            <div class="menu-frame">
+                <header class="menu-heading">
+                    <div class="eyebrow">La carte complète</div>
+                    <h2>Le menu <span>éditorial</span></h2>
+                    <p>Une seule page, toutes les recettes, une lecture fluide et un rythme visuel plus naturel</p>
+                </header>
+
+                <div class="menu-groups">
+                    <section class="menu-group">
+                        <div class="menu-group-head">
+                            <span class="menu-group-index">01</span>
+                            <h3>Les <span>classiques</span></h3>
+                        </div>
+                        <div class="menu-entries">
+                            <article class="editorial-entry entry-left" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="https://images.pexels.com/photos/32107359/pexels-photo-32107359.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Espresso" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Shot précis</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Espresso</h3>
+                                        <span class="entry-price">2,50 € / 3,50 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso de spécialité, extraction nette</p>
+                                    <p class="entry-description">Shot d'espresso intense, origines sélectionnées, extraction précise et finale nette.</p>
+                                    <span class="entry-benefit">Coup de boost maison</span>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-right" data-reveal>
+                                <figure class="entry-media shape-organic-a">
+                                    <img src="https://images.pexels.com/photos/15920113/pexels-photo-15920113.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Americano" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Long drink</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Americano</h3>
+                                        <span class="entry-price">3,50 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso allongé, eau chaude, tasse légère</p>
+                                    <p class="entry-description">Espresso allongé à l'eau chaude, tasse légère, aromatique et persistante.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-center" data-reveal>
+                                <figure class="entry-media shape-organic-b">
+                                    <img src="https://images.pexels.com/photos/2013798/pexels-photo-2013798.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Cappuccino" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Texture mousse</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Cappuccino</h3>
+                                        <span class="entry-price">4,00 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso, lait texturé, mousse fine</p>
+                                    <p class="entry-description">Espresso, lait texturé et mousse fine, équilibre crémeux à la finition café.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-left" data-reveal>
+                                <figure class="entry-media shape-organic-c">
+                                    <img src="https://images.pexels.com/photos/18997241/pexels-photo-18997241.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Cold Brew" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Infusion lente</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Cold Brew</h3>
+                                        <span class="entry-price">4,00 €</span>
+                                    </div>
+                                    <p class="entry-note">café infusé à froid, profil doux</p>
+                                    <p class="entry-description">Infusion à froid 12h, profil doux, peu d'amertume et notes nettes.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="menu-group">
+                        <div class="menu-group-head">
+                            <span class="menu-group-index">02</span>
+                            <h3>Les <span>lattés</span></h3>
+                        </div>
+                        <div class="menu-entries">
+                            <article class="editorial-entry entry-right" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="https://images.pexels.com/photos/25352709/pexels-photo-25352709.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Latte" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Velours maison</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Latte</h3>
+                                        <span class="entry-price">4,50 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso, lait micro-moussé, texture soyeuse</p>
+                                    <p class="entry-description">Espresso et lait micro-moussé, texture soyeuse, profil rond et élégant.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-left" data-reveal>
+                                <figure class="entry-media shape-organic-a">
+                                    <img src="https://images.pexels.com/photos/20184872/pexels-photo-20184872.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Vanillatte" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Douceur vanillée</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Vanillatte</h3>
+                                        <span class="entry-price">4,50 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso, lait velouté, vanille</p>
+                                    <p class="entry-description">Espresso, lait velouté et vanille, douceur gourmande au parfum subtil.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-center" data-reveal>
+                                <figure class="entry-media shape-organic-b">
+                                    <img src="https://images.pexels.com/photos/13104177/pexels-photo-13104177.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Latte Macchiato" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Couches nettes</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Latte Macchiato</h3>
+                                        <span class="entry-price">4,50 €</span>
+                                    </div>
+                                    <p class="entry-note">lait chaud, espresso marqué, bouche douce</p>
+                                    <p class="entry-description">Lait chaud marqué d'espresso, couches nettes, bouche douce et équilibrée.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-right" data-reveal>
+                                <figure class="entry-media shape-organic-c">
+                                    <img src="https://images.pexels.com/photos/14470645/pexels-photo-14470645.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Moccaccino" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Version cacao</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Moccaccino</h3>
+                                        <span class="entry-price">5,00 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso, lait, chocolat</p>
+                                    <p class="entry-description">Espresso, lait et chocolat, alliance intense avec mousse onctueuse.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-left" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="https://images.pexels.com/photos/30612387/pexels-photo-30612387.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Mocca Blanc" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Toucher lacté</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Mocca Blanc</h3>
+                                        <span class="entry-price">5,00 €</span>
+                                    </div>
+                                    <p class="entry-note">espresso, lait, chocolat blanc</p>
+                                    <p class="entry-description">Espresso, lait et chocolat blanc, texture crémeuse et finition lactée.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="menu-group">
+                        <div class="menu-group-head">
+                            <span class="menu-group-index">03</span>
+                            <h3>Matcha <span>&amp; Ube</span></h3>
+                        </div>
+                        <div class="menu-entries">
+                            <article class="editorial-entry entry-left" id="menu-matcha-latte" data-reveal>
+                                <figure class="entry-media shape-organic-b">
+                                    <img src="IMG_5773.jpg" alt="Matcha Latte" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Cérémonie</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Matcha Latte</h3>
+                                        <span class="entry-price">5,00 €</span>
+                                    </div>
+                                    <p class="entry-note">matcha de cérémonie fouetté, lait onctueux</p>
+                                    <p class="entry-description">Matcha de cérémonie fouetté, lait onctueux, finale végétale noble et nette.</p>
+                                    <span class="entry-benefit">Énergie douce & focus durable</span>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-right" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="https://images.pexels.com/photos/16170381/pexels-photo-16170381.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Matcha Vanilla" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Floral & doux</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Matcha Vanilla</h3>
+                                        <span class="entry-price">5,90 €</span>
+                                    </div>
+                                    <p class="entry-note">matcha premium, lait, vanille</p>
+                                    <p class="entry-description">Matcha premium, lait et vanille, équilibre floral et texture satinée.</p>
+                                    <span class="entry-benefit">Énergie douce & focus durable</span>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-center" data-reveal>
+                                <figure class="entry-media shape-organic-a">
+                                    <img src="https://images.pexels.com/photos/34491288/pexels-photo-34491288.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Matcha Fraise" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Fruité & frais</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Matcha Fraise</h3>
+                                        <span class="entry-price">5,90 €</span>
+                                    </div>
+                                    <p class="entry-note">matcha de cérémonie, lait, purée de fraise fraîche</p>
+                                    <p class="entry-description">Lait, matcha de cérémonie et purée de fraise fraîche, finale fruitée.</p>
+                                    <span class="entry-benefit">Énergie douce & focus durable</span>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-left" data-reveal>
+                                <figure class="entry-media shape-organic-c">
+                                    <img src="https://images.pexels.com/photos/37033512/pexels-photo-37033512.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Matcha Coco" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Ultra rafraîchissant</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Matcha Coco</h3>
+                                        <span class="entry-price">5,90 €</span>
+                                    </div>
+                                    <p class="entry-note">eau de coco, crème matcha-coco</p>
+                                    <p class="entry-description">Eau de coco et crème matcha-coco, boisson légère et très rafraîchissante.</p>
+                                    <span class="entry-benefit">Hydratation légère + énergie stable</span>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-right" id="menu-ube-latte" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="IMG_5785.jpg" alt="Ube Latte" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Visuel culte</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Ube Latte</h3>
+                                        <span class="entry-price">5,00 €</span>
+                                    </div>
+                                    <p class="entry-note">ube onctueux, lait velouté, douceur vanillée</p>
+                                    <p class="entry-description">Ube onctueux et lait velouté, saveur douce, vanillée, couleur signature.</p>
+                                    <span class="entry-benefit">Naturellement riche en antioxydants</span>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="menu-group menu-group-signatures">
+                        <div class="menu-group-head">
+                            <span class="menu-group-index">04</span>
+                            <h3>Les <span>signatures</span></h3>
+                        </div>
+                        <div class="menu-entries">
+                            <article class="editorial-entry entry-left" id="menu-signature-chai" data-reveal>
+                                <figure class="entry-media shape-organic-a">
+                                    <img src="https://images.pexels.com/photos/37146476/pexels-photo-37146476.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=900&q=80" alt="Chai Latte" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Épices chaudes</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Chai Latte</h3>
+                                        <span class="entry-price">5,50 €</span>
+                                    </div>
+                                    <p class="entry-note">mélange d'épices chaï, lait chaud, cannelle</p>
+                                    <p class="entry-description">Mélange d'épices chaï, lait chaud, cannelle, profil doux et réconfortant.</p>
+                                    <span class="entry-benefit">Épices réchauffantes</span>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-right" id="menu-signature-latte-caramel" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="5E7EBD91-6506-4AB9-857A-575920DDADE8.PNG" alt="Latte Caramel Beurre Salé" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Best-seller</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Latte Caramel<br>Beurre Salé</h3>
+                                        <span class="entry-price">5,90 €</span>
+                                    </div>
+                                    <p class="entry-note">café de spécialité, lait, caramel beurre salé maison</p>
+                                    <p class="entry-description">Café de spécialité, lait et caramel beurre salé maison, finale gourmande.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-center" id="menu-signature-pistachio" data-reveal>
+                                <figure class="entry-media shape-organic-b">
+                                    <img src="D9010762-D902-4D16-9811-A03AA862553F.PNG" alt="Pistachio Latte" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Maison</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Pistachio Latte</h3>
+                                        <span class="entry-price">5,90 €</span>
+                                    </div>
+                                    <p class="entry-note">café, lait, crème de pistache artisanale</p>
+                                    <p class="entry-description">Café, lait et crème de pistache artisanale, notes toastées et texture riche.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-left" id="menu-signature-cinnamon-roll" data-reveal>
+                                <figure class="entry-media shape-organic-c">
+                                    <img src="IMG_5838.jpg" alt="Cinnamon Roll Latte" loading="lazy" decoding="async">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Dessert liquide</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Cinnamon Roll Latte</h3>
+                                        <span class="entry-price">6,10 €</span>
+                                    </div>
+                                    <p class="entry-note">café, lait, cannelle, mousse vanille</p>
+                                    <p class="entry-description">Café, lait, cannelle et mousse vanille, esprit dessert liquide premium.</p>
+                                </div>
+                            </article>
+
+                            <article class="editorial-entry entry-right" id="menu-signature-blueberry-ube" data-reveal>
+                                <figure class="entry-media shape-circle">
+                                    <img src="https://images.unsplash.com/photo-1717980650780-480994219332?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=60&w=1600" alt="Blueberry Ube Latte" loading="lazy">
+                                </figure>
+                                <div class="entry-copy">
+                                    <span class="entry-label">Signature colorée</span>
+                                    <div class="entry-topline">
+                                        <h3 class="entry-title">Blueberry Ube Latte</h3>
+                                        <span class="entry-price">6,10 €</span>
+                                    </div>
+                                    <p class="entry-note">café, lait, purée de myrtille, ube</p>
+                                    <p class="entry-description">Café, lait, purée de myrtille et ube, alliance crémeuse et fruitée.</p>
+                                    <span class="entry-benefit">Duo antioxydant myrtille + ube</span>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="stack-card card-location" data-stack-card>
+            <div class="location-layout">
+                <div class="location-copy">
+                    <div class="eyebrow">Nous trouver</div>
+                    <h2 class="location-title">Le <span>Port</span> de Leucate</h2>
+                    <p class="location-text">Soleil, quai, air marin et café de spécialité : MON latté s'installe au cœur du Port de Leucate, dans une adresse pensée pour ralentir, partager et revenir.</p>
+                    <div class="location-meta">
+                        <span class="location-badge">Ouvert 7j/7 · 7h30 - 18h30</span>
+                        <p>11370 Leucate, Pyrénées-Orientales. Entre deux promenades sur le port, on s'y pose pour un matcha, un latte signature ou une pause très douce face à la lumière du sud.</p>
+                    </div>
+                </div>
+
+                <div class="location-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.4402107025912!2d3.0368153767242503!3d42.86355190314313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b05ef5714c480b%3A0x78f0b7e36f726026!2sQuai%20de%20l'Angle%2C%2011370%20Leucate!5e0!3m2!1sfr!2sfr!4v1776953480718!5m2!1sfr!2sfr" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Carte du Port de Leucate"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        MON latté · Port de Leucate · Coffee shop de spécialité
+    </footer>
+
+    <script>
+        const editorialItems = document.querySelectorAll("[data-reveal]");
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const navToggle = document.querySelector(".nav-toggle");
+        const navLinks = document.getElementById("mobile-nav");
+        const navBackdrop = document.querySelector(".nav-backdrop");
+        const navAnchors = navLinks ? navLinks.querySelectorAll("a") : [];
+        let lockedScrollY = 0;
+
+        const closeMobileMenu = ({ restoreScroll = true } = {}) => {
+            if (!document.body.classList.contains("menu-open")) return;
+
+            document.body.classList.remove("menu-open");
+            document.body.style.top = "";
+
+            if (navToggle) {
+                navToggle.setAttribute("aria-expanded", "false");
+                navToggle.setAttribute("aria-label", "Ouvrir le menu");
+            }
+
+            if (restoreScroll) {
+                window.scrollTo(0, lockedScrollY);
+            }
+        };
+
+        const openMobileMenu = () => {
+            if (!navToggle || window.innerWidth > 768) return;
+
+            lockedScrollY = window.scrollY || window.pageYOffset || 0;
+            document.body.style.top = `-${lockedScrollY}px`;
+            document.body.classList.add("menu-open");
+            navToggle.setAttribute("aria-expanded", "true");
+            navToggle.setAttribute("aria-label", "Fermer le menu");
+        };
+
+        if (navToggle) {
+            navToggle.addEventListener("click", () => {
+                if (document.body.classList.contains("menu-open")) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+        }
+
+        if (navBackdrop) {
+            navBackdrop.addEventListener("click", () => closeMobileMenu());
+        }
+
+        navAnchors.forEach((link) => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu({ restoreScroll: false });
+                }
+            });
+        });
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
+        if (!prefersReducedMotion) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.14,
+                rootMargin: "0px 0px -10% 0px"
+            });
+
+            editorialItems.forEach((item) => revealObserver.observe(item));
+        } else {
+            editorialItems.forEach((item) => item.classList.add("is-visible"));
+        }
+    </script>
+</body>
+</html>
