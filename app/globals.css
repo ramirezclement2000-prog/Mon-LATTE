@@ -50,6 +50,12 @@ a {
 
 img {
   max-width: 100%;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+figure img {
+  pointer-events: none;
 }
 
 section[id] {
