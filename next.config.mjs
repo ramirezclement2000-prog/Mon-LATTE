@@ -4,6 +4,21 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"]
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.monlatte.fr"
+          }
+        ],
+        destination: "https://monlatte.fr/:path*",
+        permanent: true
+      }
+    ];
+  },
   async headers() {
     return [
       {
