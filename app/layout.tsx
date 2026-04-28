@@ -18,9 +18,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://monlatte.fr"),
-  title: "MON latte | Coffee shop de spécialité à Leucate",
+  title: "MON latte | Ouverture prochaine",
   description:
-    "MON latte, coffee shop de spécialité au Port de Leucate : latte art, recettes inclusives, matcha, ube et ambiance cosy premium.",
+    "MON latte prépare son coffee shop de spécialité. Silence, ça torrifie : ouverture prochaine.",
   icons: {
     icon: "/favicon.ico",
     apple: "/images/mon-latte-logo.png"
