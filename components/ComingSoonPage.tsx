@@ -23,6 +23,8 @@ const signals = [
   "coffee shop de spécialité",
   "lumière du sud",
   "recettes en coulisses",
+  "matcha",
+  "ubé",
   "ouverture prochainement"
 ];
 
