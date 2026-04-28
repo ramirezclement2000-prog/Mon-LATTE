@@ -18,9 +18,9 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://monlatte.fr"),
-  title: "MON latte | Ouverture prochaine",
+  title: "MON latte | Ouverture prochainement",
   description:
-    "MON latte prépare son coffee shop de spécialité. Silence, ça torrifie : ouverture prochaine.",
+    "MON latte prépare son coffee shop de spécialité. Silence, ça torrifie : ouverture prochainement.",
   icons: {
     icon: "/favicon.ico",
     apple: "/images/mon-latte-logo.png"

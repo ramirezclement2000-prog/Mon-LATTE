@@ -23,7 +23,7 @@ const signals = [
   "coffee shop de spécialité",
   "lumière du sud",
   "recettes en coulisses",
-  "ouverture prochaine"
+  "ouverture prochainement"
 ];
 
 export function ComingSoonPage() {
@@ -58,7 +58,7 @@ export function ComingSoonPage() {
           <div className="w-full min-w-0 max-w-[calc(100vw_-_4rem)] sm:max-w-2xl">
             <p className="mb-5 flex items-center gap-3 text-xs font-bold uppercase text-gold">
               <span className="h-px w-10 bg-gold" />
-              Ouverture en préparation
+              Ouverture en cours de préparation
             </p>
 
             <h1 className="font-serif text-[2.86rem] font-semibold leading-[0.9] text-text sm:text-[5rem] lg:text-[6.45rem]">
@@ -138,7 +138,7 @@ export function ComingSoonPage() {
 
         <footer className="grid gap-3 border-t border-gold/18 py-4 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-text/45 sm:flex sm:items-center sm:justify-between">
           <span>MON latte · Coffee shop en préparation</span>
-          <span>Ouverture prochaine</span>
+          <span>Ouverture prochainement</span>
         </footer>
       </div>
     </main>
