@@ -68,8 +68,9 @@ export function ComingSoonPage() {
             </h1>
 
             <p className="mt-5 max-w-xl text-[1rem] leading-7 text-text/66 sm:text-[1.08rem] sm:leading-8">
-              MON latte prépare son premier coffee shop avec la douceur du sud, des recettes
-              signature en coulisses et ce petit supplément d&apos;âme qui donne envie de rester.
+              MON latte prépare son premier coffee shop au cœur du Port de Leucate, avec la
+              douceur du sud, des recettes signature en coulisses et ce petit supplément
+              d&apos;âme qui donne envie de rester.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-2 text-[0.66rem] font-bold uppercase tracking-[0.04em] text-green sm:text-[0.7rem]">
