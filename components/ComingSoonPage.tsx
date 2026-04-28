@@ -117,16 +117,25 @@ export function ComingSoonPage() {
               </div>
             </figure>
 
-            <div className="absolute -bottom-5 left-4 right-4 border border-gold/18 bg-[#fffdf8]/88 p-4 shadow-2xl shadow-green/10 backdrop-blur-xl sm:left-auto sm:right-8 sm:w-[320px] sm:p-5">
-              <p className="text-[0.66rem] font-bold uppercase tracking-[0.16em] text-gold">
-                Note du comptoir
-              </p>
-              <p className="mt-2 font-serif text-[1.85rem] font-semibold leading-none text-text">
-                La machine chauffe.
-              </p>
-              <p className="mt-3 text-sm leading-6 text-text/62">
-                Les premières nouvelles arrivent bientôt. Promis, on ne laissera pas refroidir.
-              </p>
+            <div className="absolute -bottom-5 left-4 right-4 overflow-hidden border border-white/70 bg-[linear-gradient(135deg,rgba(255,253,248,0.96),rgba(248,239,226,0.9))] p-4 shadow-2xl shadow-green/12 backdrop-blur-2xl sm:left-auto sm:right-8 sm:w-[330px] sm:p-5">
+              <div className="pointer-events-none absolute -right-10 -top-12 h-28 w-28 rounded-full bg-gold/18 blur-2xl" />
+              <div className="pointer-events-none absolute -bottom-14 -left-10 h-28 w-28 rounded-full bg-green/10 blur-2xl" />
+              <div className="relative">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold/22 bg-white/70 text-[1.05rem] font-serif italic text-green shadow-xl shadow-gold/10">
+                    m
+                  </span>
+                  <p className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-gold">
+                    Note du comptoir
+                  </p>
+                </div>
+                <p className="font-serif text-[1.72rem] font-semibold leading-[0.95] text-text sm:text-[1.9rem]">
+                  La machine <span className="italic text-green">chauffe.</span>
+                </p>
+                <p className="mt-3 max-w-[16rem] text-[0.86rem] leading-6 text-text/62">
+                  Les premières nouvelles arrivent bientôt. Promis, rien ne refroidit ici.
+                </p>
+              </div>
             </div>
           </div>
         </section>
