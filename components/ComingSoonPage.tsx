@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const previewImages = [
   {
@@ -78,12 +79,7 @@ export function ComingSoonPage() {
             </div>
 
             <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap sm:items-center">
-              <a
-                href="mailto:contact@monlatte.fr?subject=Je%20veux%20suivre%20l'ouverture%20MON%20latte"
-                className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-green px-6 text-xs font-bold uppercase tracking-[0.08em] text-white shadow-2xl shadow-green/10 transition hover:-translate-y-0.5 hover:bg-text sm:w-auto"
-              >
-                Être prévenu
-              </a>
+              <NewsletterSignup />
               <a
                 href="mailto:contact@monlatte.fr"
                 className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-text/10 bg-white/45 px-6 text-xs font-bold uppercase tracking-[0.08em] text-text backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-gold/40 hover:text-green sm:w-auto"
