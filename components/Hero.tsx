@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SectionLink } from "@/components/SectionLink";
 
 const heroGallery = [
   {
@@ -36,18 +37,18 @@ export function Hero() {
         </p>
 
         <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center">
-          <a
+          <SectionLink
             href="#menu"
             className="inline-flex h-12 w-full items-center justify-center rounded-full bg-green px-6 text-xs font-bold uppercase text-white shadow-2xl shadow-green/10 transition hover:-translate-y-0.5 hover:bg-text sm:w-auto"
           >
             Voir la carte
-          </a>
-          <a
+          </SectionLink>
+          <SectionLink
             href="#values"
             className="inline-flex h-12 w-full items-center justify-center rounded-full border border-text/10 bg-white/45 px-6 text-xs font-bold uppercase text-text backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-gold/40 hover:text-green sm:w-auto"
           >
             Notre vision
-          </a>
+          </SectionLink>
         </div>
       </div>
 
