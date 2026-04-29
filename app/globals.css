@@ -62,11 +62,6 @@ section[id] {
   scroll-margin-top: 84px;
 }
 
-main > section:not(#hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: 900px;
-}
-
 iframe {
   display: block;
 }

@@ -88,14 +88,6 @@ export function Navbar() {
     setMenuOpen(false);
   }
 
-  function getScrollBehavior(): ScrollBehavior {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return "auto";
-    }
-
-    return "smooth";
-  }
-
   function scrollToSection(event: MouseEvent<HTMLAnchorElement>, href: string) {
     const id = href.slice(1);
     const target = document.getElementById(id);
@@ -108,10 +100,25 @@ export function Navbar() {
     window.history.pushState(null, "", href);
     setActiveHash(href);
     closeMobileMenu();
+    document.body.classList.remove("menu-open");
 
-    const top =
-      target.getBoundingClientRect().top + window.scrollY - (window.innerWidth < 768 ? 78 : 96);
-    window.scrollTo({ top: Math.max(0, top), behavior: getScrollBehavior() });
+    const navOffset = window.innerWidth < 768 ? 78 : 96;
+
+    const alignTarget = () => {
+      const top = target.getBoundingClientRect().top + window.scrollY - navOffset;
+      const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = "auto";
+      window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+      document.documentElement.style.scrollBehavior = previousScrollBehavior;
+    };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        alignTarget();
+        window.setTimeout(alignTarget, 120);
+        window.setTimeout(alignTarget, 480);
+      });
+    });
   }
 
   function linkClass(href: string) {
