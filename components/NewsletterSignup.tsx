@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 type Status = {
   tone: "success" | "error";
@@ -84,14 +85,16 @@ export function NewsletterSignup() {
               </h2>
               <p className="mt-3 text-sm leading-6 text-text/62">
                 Laissez vos coordonnées et vous recevrez les premières nouvelles avant
-                l&apos;ouverture.
+                l&apos;ouverture. Les champs marqués d&apos;un astérisque sont nécessaires ;
+                les autres nous aident seulement à mieux préparer les invitations locales.
               </p>
             </div>
 
             <form onSubmit={submit} className="mt-6 grid gap-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
-                  Prénom
+                  Prénom *
+                  <span className="sr-only"> obligatoire</span>
                   <input
                     required
                     name="firstName"
@@ -106,7 +109,6 @@ export function NewsletterSignup() {
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
                   Nom
                   <input
-                    required
                     name="lastName"
                     autoComplete="family-name"
                     value={form.lastName}
@@ -119,7 +121,8 @@ export function NewsletterSignup() {
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
-                  E-mail
+                  E-mail *
+                  <span className="sr-only"> obligatoire</span>
                   <input
                     required
                     type="email"
@@ -135,7 +138,6 @@ export function NewsletterSignup() {
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
                   Téléphone
                   <input
-                    required
                     type="tel"
                     name="phone"
                     autoComplete="tel"
@@ -151,7 +153,6 @@ export function NewsletterSignup() {
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
                   Code postal
                   <input
-                    required
                     name="postalCode"
                     inputMode="numeric"
                     autoComplete="postal-code"
@@ -165,7 +166,6 @@ export function NewsletterSignup() {
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
                   Adresse
                   <input
-                    required
                     name="address"
                     autoComplete="street-address"
                     value={form.address}
@@ -174,6 +174,19 @@ export function NewsletterSignup() {
                     placeholder="Votre adresse"
                   />
                 </label>
+              </div>
+
+              <div className="border border-gold/18 bg-white/45 p-4 text-sm leading-6 text-text/62">
+                <p>
+                  MON latte utilise ces informations pour gérer la liste d&apos;attente, envoyer
+                  les nouvelles liées à l&apos;ouverture et, si vous les renseignez, adapter les
+                  invitations locales. Vous pouvez retirer votre consentement à tout moment en
+                  écrivant à{" "}
+                  <a href="mailto:contact@monlatte.fr" className="font-semibold text-green underline">
+                    contact@monlatte.fr
+                  </a>
+                  .
+                </p>
               </div>
 
               <label className="flex items-start gap-3 border border-gold/18 bg-white/45 p-4 text-sm leading-6 text-text/62">
@@ -186,7 +199,15 @@ export function NewsletterSignup() {
                 />
                 <span>
                   J&apos;accepte que MON latte conserve mes coordonnées pour m&apos;envoyer les
-                  nouvelles liées à l&apos;ouverture et aux newsletters.
+                  nouvelles liées à l&apos;ouverture et aux newsletters, conformément à la{" "}
+                  <Link
+                    href="/politique-confidentialite"
+                    target="_blank"
+                    className="font-semibold text-green underline"
+                  >
+                    politique de confidentialité
+                  </Link>
+                  .
                 </span>
               </label>
 

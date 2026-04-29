@@ -28,15 +28,11 @@ export async function POST(request: NextRequest) {
 
   if (
     !isFilled(firstName) ||
-    !isFilled(lastName) ||
     !isEmail(email) ||
-    !isFilled(phone) ||
-    !isFilled(postalCode) ||
-    !isFilled(address) ||
     !consent
   ) {
     return NextResponse.json(
-      { message: "Merci de compléter vos coordonnées et d'accepter l'inscription." },
+      { message: "Merci d'indiquer votre prénom, votre e-mail et d'accepter l'inscription." },
       { status: 400 }
     );
   }

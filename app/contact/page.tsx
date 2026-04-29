@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LegalFooter } from "@/components/LegalFooter";
 
 export default function Contact() {
   return (
@@ -69,6 +70,8 @@ export default function Contact() {
             </div>
           </figure>
         </section>
+
+        <LegalFooter />
       </div>
     </main>
   );

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { LegalFooter } from "@/components/LegalFooter";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const previewImages = [
@@ -139,10 +140,7 @@ export function ComingSoonPage() {
           </div>
         </section>
 
-        <footer className="grid gap-3 border-t border-gold/18 py-4 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-text/45 sm:flex sm:items-center sm:justify-between">
-          <span>MON latte · Coffee shop en préparation</span>
-          <span>Ouverture prochainement</span>
-        </footer>
+        <LegalFooter />
       </div>
     </main>
   );

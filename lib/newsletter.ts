@@ -14,10 +14,16 @@ export type NewsletterClientInput = {
 type NewsletterClientRecord = NewsletterClientInput & {
   createdAt: string;
   consentAt: string;
+  consentText: string;
+  privacyVersion: string;
+  source: string;
 };
 
 const csvPath = "newsletter/clients.csv";
 const localCsvPath = path.join(process.cwd(), "data", "clients.csv");
+const privacyVersion = "2026-04-29";
+const newsletterConsentText =
+  "J'accepte que MON latte conserve mes coordonnées pour m'envoyer les nouvelles liées à l'ouverture et aux newsletters.";
 const header = [
   "createdAt",
   "consentAt",
@@ -26,7 +32,10 @@ const header = [
   "email",
   "phone",
   "postalCode",
-  "address"
+  "address",
+  "consentText",
+  "privacyVersion",
+  "source"
 ];
 
 export const duplicateNewsletterMessage =
@@ -94,6 +103,27 @@ function parseClients(csv: string) {
   });
 }
 
+function normalizeCsv(csv: string) {
+  const clients = parseClients(csv);
+  const rows = clients.map((client) =>
+    toCsvRow({
+      createdAt: client.createdAt,
+      consentAt: client.consentAt || client.createdAt,
+      firstName: client.firstName,
+      lastName: client.lastName,
+      email: client.email,
+      phone: client.phone,
+      postalCode: client.postalCode,
+      address: client.address,
+      consentText: client.consentText || newsletterConsentText,
+      privacyVersion: client.privacyVersion || privacyVersion,
+      source: client.source || "site"
+    })
+  );
+
+  return `${header.join(",")}\n${rows.join("\n")}${rows.length ? "\n" : ""}`;
+}
+
 async function readLocalCsv() {
   try {
     return await fs.readFile(localCsvPath, "utf8");
@@ -156,9 +186,12 @@ export async function addNewsletterClient(input: NewsletterClientInput) {
   const address = cleanValue(input.address);
 
   const csv = await readNewsletterCsv();
-  const clients = parseClients(csv);
+  const normalizedCsv = normalizeCsv(csv);
+  const clients = parseClients(normalizedCsv);
   const duplicate = clients.some(
-    (client) => normalizeEmail(client.email) === email || normalizePhone(client.phone) === phone
+    (client) =>
+      normalizeEmail(client.email) === email ||
+      (phone.length > 0 && normalizePhone(client.phone) === phone)
   );
 
   if (duplicate) {
@@ -174,10 +207,13 @@ export async function addNewsletterClient(input: NewsletterClientInput) {
     email,
     phone,
     postalCode,
-    address
+    address,
+    consentText: newsletterConsentText,
+    privacyVersion,
+    source: "site"
   };
 
-  const nextCsv = `${csv.trimEnd()}\n${toCsvRow(record)}\n`;
+  const nextCsv = `${normalizedCsv.trimEnd()}\n${toCsvRow(record)}\n`;
   await writeNewsletterCsv(nextCsv);
 
   return { ok: true as const };

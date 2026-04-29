@@ -1,15 +1,25 @@
+import type { Metadata } from "next";
 import { AnchorScroll } from "@/components/AnchorScroll";
 import { BentoValues } from "@/components/BentoValues";
 import { EditorialMenu } from "@/components/EditorialMenu";
 import { EventSection } from "@/components/EventSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { Hero } from "@/components/Hero";
+import { LegalFooter } from "@/components/LegalFooter";
 import { Navbar } from "@/components/Navbar";
 import { PartnersSection } from "@/components/PartnersSection";
 import { SocialSection } from "@/components/SocialSection";
 import { StackSection } from "@/components/StackSection";
 import { StorySection } from "@/components/StorySection";
 import { VisitSection } from "@/components/VisitSection";
+
+export const metadata: Metadata = {
+  title: "MON latte | Preview privée",
+  robots: {
+    index: false,
+    follow: false
+  }
+};
 
 export default function Preview() {
   return (
@@ -42,6 +52,9 @@ export default function Preview() {
       </StackSection>
       <StackSection id="visit" className="bg-text">
         <VisitSection />
+        <div className="mx-auto mt-10 max-w-7xl">
+          <LegalFooter tone="dark" />
+        </div>
       </StackSection>
     </main>
   );

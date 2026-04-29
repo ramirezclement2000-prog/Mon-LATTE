@@ -44,7 +44,7 @@ export function Hero() {
             Voir la carte
           </SectionLink>
           <SectionLink
-            href="#values"
+            href="#experience"
             className="inline-flex h-12 w-full items-center justify-center rounded-full border border-text/10 bg-white/45 px-6 text-xs font-bold uppercase text-text backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-gold/40 hover:text-green sm:w-auto"
           >
             Notre vision
