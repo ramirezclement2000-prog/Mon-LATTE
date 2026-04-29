@@ -79,7 +79,7 @@ export function EventSection() {
           </div>
 
           <form
-            action="/contact"
+            action="/api/contact"
             method="post"
             className="grid gap-3 sm:grid-cols-2"
           >
