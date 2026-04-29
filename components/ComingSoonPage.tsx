@@ -116,7 +116,7 @@ export function ComingSoonPage() {
               </div>
             </figure>
 
-            <div className="absolute -bottom-5 left-4 right-4 overflow-hidden border border-white/70 bg-[linear-gradient(135deg,rgba(255,253,248,0.96),rgba(248,239,226,0.9))] p-4 shadow-2xl shadow-green/12 backdrop-blur-2xl sm:left-8 sm:right-auto sm:w-[330px] sm:p-5 lg:-bottom-24 lg:-left-24 lg:w-[350px]">
+            <div className="relative mx-2 mt-3 overflow-hidden border border-white/70 bg-[linear-gradient(135deg,rgba(255,253,248,0.96),rgba(248,239,226,0.9))] p-4 shadow-2xl shadow-green/12 backdrop-blur-2xl sm:mx-0 sm:max-w-[360px] sm:p-5 lg:absolute lg:-bottom-24 lg:-left-24 lg:mt-0 lg:w-[350px]">
               <div className="pointer-events-none absolute -right-10 -top-12 h-28 w-28 rounded-full bg-gold/18 blur-2xl" />
               <div className="pointer-events-none absolute -bottom-14 -left-10 h-28 w-28 rounded-full bg-green/10 blur-2xl" />
               <div className="relative">
