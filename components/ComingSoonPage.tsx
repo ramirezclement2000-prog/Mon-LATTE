@@ -14,7 +14,7 @@ const previewImages = [
   },
   {
     src: "/images/matcha-fraise.jpg",
-    alt: "Boisson signature colorée en préparation",
+    alt: "Boisson signature matcha et ubé en préparation",
     className: "min-h-[180px] sm:min-h-[220px]"
   }
 ] as const;
