@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addNewsletterClient, duplicateNewsletterMessage } from "@/lib/newsletter";
+import { assertSameOrigin, getClientIp, rateLimit, readJsonBody } from "@/lib/security";
 
 export const runtime = "nodejs";
+const maxBodyBytes = 8_192;
+const maxFieldLength = 180;
 
 function isFilled(value: unknown) {
   return typeof value === "string" && value.trim().length > 1;
@@ -11,8 +14,29 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
+function isReasonable(value: string) {
+  return value.length <= maxFieldLength;
+}
+
 export async function POST(request: NextRequest) {
-  const body = await request.json().catch(() => null);
+  if (!assertSameOrigin(request)) {
+    return NextResponse.json({ message: "Origine refusée." }, { status: 403 });
+  }
+
+  if (!rateLimit(`newsletter:${getClientIp(request)}`, 8, 60_000)) {
+    return NextResponse.json(
+      { message: "Trop de tentatives. Réessayez dans une minute." },
+      { status: 429 }
+    );
+  }
+
+  const parsed = await readJsonBody(request, maxBodyBytes);
+
+  if (!parsed.ok) {
+    return parsed.response;
+  }
+
+  const body = parsed.body as Record<string, unknown>;
 
   if (!body || typeof body !== "object") {
     return NextResponse.json({ message: "La demande est incomplète." }, { status: 400 });
@@ -25,12 +49,17 @@ export async function POST(request: NextRequest) {
   const postalCode = String(body.postalCode ?? "");
   const address = String(body.address ?? "");
   const consent = Boolean(body.consent);
+  const honeypot = String((body as { company?: unknown }).company ?? "");
 
-  if (
-    !isFilled(firstName) ||
-    !isEmail(email) ||
-    !consent
-  ) {
+  if (honeypot.trim().length > 0) {
+    return NextResponse.json({
+      message: "C'est noté, vous êtes sur la liste. Les premières nouvelles arrivent bientôt."
+    });
+  }
+
+  const fields = [firstName, lastName, email, phone, postalCode, address];
+
+  if (!isFilled(firstName) || !isEmail(email) || !consent || !fields.every(isReasonable)) {
     return NextResponse.json(
       { message: "Merci d'indiquer votre prénom, votre e-mail et d'accepter l'inscription." },
       { status: 400 }

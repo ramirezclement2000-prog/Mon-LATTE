@@ -15,6 +15,7 @@ const initialForm = {
   phone: "",
   postalCode: "",
   address: "",
+  company: "",
   consent: false
 };
 
@@ -91,6 +92,17 @@ export function NewsletterSignup() {
             </div>
 
             <form onSubmit={submit} className="mt-6 grid gap-4">
+              <input
+                type="text"
+                name="company"
+                autoComplete="off"
+                tabIndex={-1}
+                value={form.company}
+                onChange={(event) => updateField("company", event.target.value)}
+                className="hidden"
+                aria-hidden="true"
+              />
+
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
                   Prénom *
