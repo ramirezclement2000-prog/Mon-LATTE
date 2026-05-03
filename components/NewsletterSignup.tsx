@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 
 type Status = {
@@ -24,6 +24,23 @@ export function NewsletterSignup() {
   const [pending, setPending] = useState(false);
   const [status, setStatus] = useState<Status>(null);
   const [form, setForm] = useState(initialForm);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+    };
+  }, [open]);
 
   function updateField(field: keyof typeof initialForm, value: string | boolean) {
     setForm((current) => ({ ...current, [field]: value }));
@@ -66,12 +83,20 @@ export function NewsletterSignup() {
       </button>
 
       {open ? (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-text/35 px-4 py-6 backdrop-blur-md">
-          <div className="relative max-h-[calc(100dvh-3rem)] w-full max-w-2xl overflow-y-auto border border-white/70 bg-[linear-gradient(135deg,rgba(255,253,248,0.98),rgba(248,239,226,0.94))] p-5 shadow-2xl shadow-text/20 sm:p-7">
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto overscroll-y-contain bg-text/30 px-4 py-4 sm:grid sm:place-items-center sm:py-6 sm:backdrop-blur-md"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="newsletter-title"
+            className="relative mx-auto w-full max-w-2xl border border-white/70 bg-[linear-gradient(135deg,rgba(255,253,248,0.98),rgba(248,239,226,0.94))] p-5 shadow-xl shadow-text/15 sm:p-7 sm:shadow-2xl sm:shadow-text/20"
+          >
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-text/10 bg-white/70 text-lg leading-none text-text/65 transition hover:border-gold/40 hover:text-green"
+              className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full border border-text/10 bg-white/80 text-lg leading-none text-text/65 transition hover:border-gold/40 hover:text-green"
               aria-label="Fermer"
             >
               ×
@@ -81,13 +106,16 @@ export function NewsletterSignup() {
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-gold">
                 Liste privée MON latte
               </p>
-              <h2 className="mt-3 font-serif text-[2.2rem] font-semibold leading-none text-text sm:text-[2.8rem]">
+              <h2
+                id="newsletter-title"
+                className="mt-3 font-serif text-[2.2rem] font-semibold leading-none text-text sm:text-[2.8rem]"
+              >
                 On garde une tasse pour vous.
               </h2>
               <p className="mt-3 text-sm leading-6 text-text/62">
                 Laissez vos coordonnées et vous recevrez les premières nouvelles avant
-                l&apos;ouverture. Les champs marqués d&apos;un astérisque sont nécessaires ;
-                les autres nous aident seulement à mieux préparer les invitations locales.
+                l&apos;ouverture. Les champs marqués d&apos;un astérisque sont nécessaires.
+                Les champs indiqués comme facultatifs restent libres.
               </p>
             </div>
 
@@ -114,19 +142,21 @@ export function NewsletterSignup() {
                     value={form.firstName}
                     onChange={(event) => updateField("firstName", event.target.value)}
                     className="min-h-12 border border-gold/20 bg-white/70 px-4 text-sm font-medium normal-case tracking-normal text-text outline-none transition placeholder:text-text/35 focus:border-green/45"
-                    placeholder="Clément"
+                    placeholder="Prénom"
                   />
                 </label>
 
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
-                  Nom
+                  <span>
+                    Nom <span className="text-text/45">(facultatif)</span>
+                  </span>
                   <input
                     name="lastName"
                     autoComplete="family-name"
                     value={form.lastName}
                     onChange={(event) => updateField("lastName", event.target.value)}
                     className="min-h-12 border border-gold/20 bg-white/70 px-4 text-sm font-medium normal-case tracking-normal text-text outline-none transition placeholder:text-text/35 focus:border-green/45"
-                    placeholder="Ramirez"
+                    placeholder="Nom"
                   />
                 </label>
               </div>
@@ -148,7 +178,9 @@ export function NewsletterSignup() {
                 </label>
 
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
-                  Téléphone
+                  <span>
+                    Téléphone <span className="text-text/45">(facultatif)</span>
+                  </span>
                   <input
                     type="tel"
                     name="phone"
@@ -163,20 +195,26 @@ export function NewsletterSignup() {
 
               <div className="grid gap-4 sm:grid-cols-[0.42fr_1fr]">
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
-                  Code postal
+                  Code postal *
+                  <span className="sr-only"> obligatoire</span>
                   <input
+                    required
                     name="postalCode"
                     inputMode="numeric"
+                    pattern="[0-9]{5}"
+                    maxLength={5}
                     autoComplete="postal-code"
                     value={form.postalCode}
                     onChange={(event) => updateField("postalCode", event.target.value)}
                     className="min-h-12 border border-gold/20 bg-white/70 px-4 text-sm font-medium normal-case tracking-normal text-text outline-none transition placeholder:text-text/35 focus:border-green/45"
-                    placeholder="11370"
+                    placeholder="Code postal"
                   />
                 </label>
 
                 <label className="grid gap-2 text-xs font-bold uppercase tracking-[0.08em] text-green">
-                  Adresse
+                  <span>
+                    Adresse <span className="text-text/45">(facultatif)</span>
+                  </span>
                   <input
                     name="address"
                     autoComplete="street-address"

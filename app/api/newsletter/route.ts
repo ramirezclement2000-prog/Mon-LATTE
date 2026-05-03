@@ -14,6 +14,10 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
+function isPostalCode(value: string) {
+  return /^\d{5}$/.test(value.trim());
+}
+
 function isReasonable(value: string) {
   return value.length <= maxFieldLength;
 }
@@ -59,9 +63,18 @@ export async function POST(request: NextRequest) {
 
   const fields = [firstName, lastName, email, phone, postalCode, address];
 
-  if (!isFilled(firstName) || !isEmail(email) || !consent || !fields.every(isReasonable)) {
+  if (
+    !isFilled(firstName) ||
+    !isEmail(email) ||
+    !isPostalCode(postalCode) ||
+    !consent ||
+    !fields.every(isReasonable)
+  ) {
     return NextResponse.json(
-      { message: "Merci d'indiquer votre prénom, votre e-mail et d'accepter l'inscription." },
+      {
+        message:
+          "Merci d'indiquer votre prénom, votre e-mail, votre code postal et d'accepter l'inscription."
+      },
       { status: 400 }
     );
   }
